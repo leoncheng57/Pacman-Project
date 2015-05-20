@@ -7,7 +7,6 @@ private char wall = 'w';
 
 
 
-
 public void setup(){
   
 }
