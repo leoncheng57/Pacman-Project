@@ -1,3 +1,3 @@
 public class Monster{
-  private int color;
+  //private int color;
 }
