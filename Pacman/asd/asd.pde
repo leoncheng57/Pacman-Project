@@ -6,8 +6,6 @@ private char path = 'p';
 private char wall = 'w';
 
 
-
-
 public void setup() {
   background(0);
   size(700, 500);
@@ -31,7 +29,6 @@ public void makeStage() {
   for (int r = width/2-400/2; r<width/2+400/2;r++){
     field[r][height/2]=wall;
   }
-}
 
 public void loop() {
 }
