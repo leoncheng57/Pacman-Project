@@ -1,8 +1,4 @@
-public class MrPacman{
-  private int col;
-  private int speed;
-  private int attack;
-  private int lives;
-  
-  
+public class MrPacman extends Character{
+ 
+  public void changeDirection 
 }

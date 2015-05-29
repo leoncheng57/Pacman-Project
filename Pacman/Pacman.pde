@@ -8,16 +8,8 @@ private char wall = 'w';
 
 public void setup() {
   background(0);
-  size(10, 10);
-  field = new Object[width][height];
-//  for (int r = 0; r<field.length; r++) {
-//    for (int c = 0; c<field[0].length;c++){
-//      field[r][c] = path; 
-//    }
-//  }
-  //printing the following out to see what the array looks like
-  for (Object[] o : field){
-    println(Arrays.toString(o));
-  }
+  size(700, 500);
+  //Block b = new Block(50,50,50,50);
+  Character c = new Character(50,50);
 }  
 
