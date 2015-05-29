@@ -22,4 +22,9 @@ Future Ideas
 * cheat/sandbox mode
 * upgrades
 * attack
-* 
+
+
+DEVLOG
+------
+* started block class for the stage
+* started character class 
