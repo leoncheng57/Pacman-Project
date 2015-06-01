@@ -5,6 +5,8 @@ public class Character {
   float wid = 40;
   float hgt = 40;
 
+  public Character(){ 
+  }
 
   public Character(float x, float y) {
     xCor = x;
