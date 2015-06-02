@@ -11,12 +11,12 @@ public class MrPacman extends Character {
     col = #FFE834;
   }
 
-  void drawMe() {
+  public void drawMe() {
     fill(col);
     ellipse(xCor, yCor, 25, 25);
   }
 
-  void move() {
+  public void move() {
     if (direction == 'u') yCor--;
     if (direction == 'd') yCor++;
     if (direction == 'l') xCor--;
@@ -25,6 +25,14 @@ public class MrPacman extends Character {
 
   public void setDirection(char c) {
     direction = c;
+  }
+  
+  public float getX(){
+    return xCor;
+  }
+  
+  public float getY(){
+    return yCor;
   }
 }
 

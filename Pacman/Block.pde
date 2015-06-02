@@ -4,18 +4,27 @@ public class Block {
   float yCor;
   float fatness;
   float tallness;
+  color col;
 
   public Block(float x, float y, float w, float h) {
-    rectMode(CORNER);
-    rect(x, y, w, h);
     xCor = x;
     yCor = y;
+    fatness = w;
+    tallness = h;
+    col = #0774B9;
+  }
+  
+  public void drawMe() {
+    rectMode(CORNER);
+    fill(col);
+    rect(xCor, yCor, fatness, tallness);
   }
 
   public boolean checkCollision(MrPacman p) {
-    //check xCor btn xCor and xCor+fatness
-    //check for yCor too
-    //return true or false
+    return (p.getX()>=this.xCor &&
+      p.getX()<=this.xCor+fatness &&
+      p.getY()>=this.yCor &&
+      p.getY()<=this.yCor+tallness);
   }
 }
 

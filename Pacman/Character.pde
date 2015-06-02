@@ -2,10 +2,10 @@ public class Character {
 
   float xCor;
   float yCor;
-  float wid = 40;
-  float hgt = 40;
+  float wid = 40; //may have to change this to fatness
+  float hgt = 40; //may have to chance this to tallness
 
-  public Character(){ 
+  private Character(){  //should this be private or public?
   }
 
   public Character(float x, float y) {
