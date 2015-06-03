@@ -20,7 +20,7 @@ public class Block {
     rect(xCor, yCor, fatness, tallness);
   }
 
-  public boolean checkCollision(MrPacman p) {
+  public boolean isColliding(MrPacman p) {
     return (p.getX()>=this.xCor &&
       p.getX()<=this.xCor+fatness &&
       p.getY()>=this.yCor &&

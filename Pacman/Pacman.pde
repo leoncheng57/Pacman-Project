@@ -19,7 +19,7 @@ public void setup() {
 public void draw() {
   background(0); //TODO: make a var for background color and set it to that, or use an image
   pac.drawMe();
-  pac.move();
+  movePacman();
   drawBlocks();
 }
 
@@ -27,6 +27,13 @@ public void drawBlocks() {
   for (Block b : blocks) {
     b.drawMe();
   }
+}
+
+public void movePacman() {
+  for (Block b : blocks) {
+    if (b.isColliding(pac)) return;
+  }
+  pac.move();
 }
 
 public void keyPressed() {

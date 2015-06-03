@@ -26,12 +26,12 @@ public class MrPacman extends Character {
   public void setDirection(char c) {
     direction = c;
   }
-  
-  public float getX(){
+
+  public float getX() {
     return xCor;
   }
-  
-  public float getY(){
+
+  public float getY() {
     return yCor;
   }
 }
