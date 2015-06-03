@@ -1,4 +1,4 @@
-public class Block {
+public class Block{
 
   float xCor;
   float yCor;
@@ -14,17 +14,26 @@ public class Block {
     col = #0774B9;
   }
   
+  public Block(float x, float y){
+    xCor = x*25;
+    yCor = y*25;
+    fatness = 50;
+    tallness = 50;
+    col = #0774B9;
+
+  }
+
   public void drawMe() {
     rectMode(CORNER);
     fill(col);
     rect(xCor, yCor, fatness, tallness);
   }
 
-  public boolean isColliding(MrPacman p) {
-    return (p.getX()>=this.xCor &&
-      p.getX()<=this.xCor+fatness &&
-      p.getY()>=this.yCor &&
-      p.getY()<=this.yCor+tallness);
+  public boolean isColliding(float x, float y) {
+    return (x>=this.xCor &&
+      x<=this.xCor+fatness &&
+      y>=this.yCor &&
+      y<=this.yCor+tallness);
   }
 }
 
