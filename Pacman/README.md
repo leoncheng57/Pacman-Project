@@ -42,3 +42,4 @@ DEVLOG
 * 6/2 - made checkCollision for Block (still working on Pacman movement in relation to blocks)
 * 6/3 - made collision work
 * 6/3 - put some blocks on the board
+* 6/4 - make blocksGrid 2D array and placeBlocks method (now we can put the blocks in for the stage)

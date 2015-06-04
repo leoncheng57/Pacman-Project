@@ -1,4 +1,4 @@
-public class Block{
+public class Block {
 
   float xCor;
   float yCor;
@@ -13,14 +13,13 @@ public class Block{
     tallness = h;
     col = #0774B9;
   }
-  
-  public Block(float x, float y){
-    xCor = x*25;
-    yCor = y*25;
+
+  public Block(float x, float y) { //x and y are like coords for blocksGrid
+    xCor = x*50;
+    yCor = y*50;
     fatness = 50;
     tallness = 50;
     col = #0774B9;
-
   }
 
   public void drawMe() {
