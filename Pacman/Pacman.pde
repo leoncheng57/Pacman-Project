@@ -7,7 +7,6 @@ ArrayList<Block> blocks;
 public void setup() {
   background(0);
   size(700, 500);
-
   //initializing stuff
   pac = new MrPacman();
   blocks = new ArrayList<Block>();
@@ -15,7 +14,7 @@ public void setup() {
   placeBlocks();
 }  
 
-int[][] blocksGrid = {
+int[][] stage1 = { //the one with the J and L logos
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,}, 
@@ -29,6 +28,7 @@ int[][] blocksGrid = {
 };
 
 public void placeBlocks() {
+  int[][] blocksGrid = stage1;
   //Note: blocksGrid is a column-major array?
   for (int c= 0; c<blocksGrid.length;c++){
     for (int r=0; r<blocksGrid[0].length;r++){

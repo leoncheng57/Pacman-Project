@@ -16,6 +16,7 @@ Questions
 
 Future Ideas
 ------------
+* Fix Pacman's movement so that he will only changeDirection once he reaches the middle of the path (so that Pacman cannot move sideways inside one path)
 * get images (background, pacman, ghosts, etc)
 * different levels
 * different stages
