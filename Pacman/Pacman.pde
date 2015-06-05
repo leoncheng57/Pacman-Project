@@ -4,7 +4,7 @@ import java.io.*;
 MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
-
+ArrayList<Node> nodes;
 public void setup() {
   background(0);
   size(700, 500);
@@ -12,7 +12,7 @@ public void setup() {
   pac = new MrPacman();
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
-
+  nodes = new ArrayList<Node>();
   placeBlocks();
 }  
 
@@ -35,22 +35,31 @@ public void placeBlocks() {
   for (int c= 0; c<blocksGrid.length;c++){
     for (int r=0; r<blocksGrid[0].length;r++){
       if (blocksGrid[c][r]==1)
-        blocks.add(new Block(r,c));    
+        blocks.add(new Block(r,c));   
+      else 
+        nodes.add(new Node(r,c));
     }
   }
 }
 
   public void draw() {
     background(0); //TODO: make a var for background color and set it to that, or use an image
-    pac.drawMe();
+    
     reddy.drawMe();
     drawBlocks();
+    drawNodes();
+    pac.drawMe();
     move();
   }
 
   public void drawBlocks() {
     for (Block b : blocks) {
       b.drawMe();
+    }
+  }
+  public void drawNodes(){
+    for (Node n : nodes){
+        n.drawMe();
     }
   }
 
@@ -60,14 +69,16 @@ public void placeBlocks() {
 
   public boolean canMove() {
     float size = pac.getSize();
-    for (Block b : blocks) {
-      //TODO: 
-      if (pac.getDirection()=='u' && b.isColliding(pac.getX(), pac.getY()-size/2)) return false; 
-      else if (pac.getDirection()=='d' && b.isColliding(pac.getX(), pac.getY()+size/2)) return false; 
-      else if (pac.getDirection()=='r' && b.isColliding(pac.getX()+size/2, pac.getY())) return false; 
-      else if (pac.getDirection()=='l' && b.isColliding(pac.getX()-size/2, pac.getY())) return false;
+    if (pac.getX()%50==0 && pac.getY()%50==0){
+      for (Block b : blocks) {
+        if (pac.getDirection()=='u' && b.isColliding(pac.getX(), pac.getY()-size/2)) return false; 
+        else if (pac.getDirection()=='d' && b.isColliding(pac.getX(), pac.getY()+size/2)) return false; 
+        else if (pac.getDirection()=='r' && b.isColliding(pac.getX()+size/2, pac.getY())) return false; 
+        else if (pac.getDirection()=='l' && b.isColliding(pac.getX()-size/2, pac.getY())) return false;
+      }
+       return true;
     }
-    return true;
+   return false;
   }
 
   public void keyPressed() {
