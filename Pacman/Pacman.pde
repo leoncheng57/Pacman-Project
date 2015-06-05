@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 
 MrPacman pac;
+Ghost reddy;
 ArrayList<Block> blocks;
 
 public void setup() {
@@ -9,6 +10,7 @@ public void setup() {
   size(700, 500);
   //initializing stuff
   pac = new MrPacman();
+  reddy= new Ghost();
   blocks = new ArrayList<Block>();
 
   placeBlocks();
@@ -41,6 +43,7 @@ public void placeBlocks() {
   public void draw() {
     background(0); //TODO: make a var for background color and set it to that, or use an image
     pac.drawMe();
+    reddy.drawMe();
     drawBlocks();
     move();
   }
