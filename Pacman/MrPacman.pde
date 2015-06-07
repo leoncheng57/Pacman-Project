@@ -1,8 +1,8 @@
 public class MrPacman extends Organism {
 
   public MrPacman() {
-    xCor = width/2; //starting position may be edited later
-    yCor = height/2;
+    xCor = width/2+25; //starting position may be edited later
+    yCor = height/2+25;
     col = #FFE834;
     size = 25;
     speed = 5;

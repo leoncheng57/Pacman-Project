@@ -1,5 +1,7 @@
 public class Ghost extends Organism {
+
   boolean killable;
+
   public Ghost(){
     xCor=width/2+20;
     yCor=height/2;
