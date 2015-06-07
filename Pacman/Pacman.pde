@@ -1,3 +1,5 @@
+//(CS proj) Use SCRAP PAPER, scribble it out on PAPER first before typing in code
+
 import java.util.*;
 import java.io.*;
 
