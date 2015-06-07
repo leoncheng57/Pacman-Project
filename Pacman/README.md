@@ -45,3 +45,5 @@ DEVLOG
 * 6/3 - put some blocks on the board
 * 6/4 - make blocksGrid 2D array and placeBlocks method (now we can put the blocks in for the stage)
 * 6/4 - reorganized methods in MrPacman and Organism so that more of the methods are in the superclass Organism
+* 6/5 - began working on the Ghost and Node
+* 6/7 - Pacman can now only move in the center of the path
