@@ -1,5 +1,7 @@
-//Use SCRAP PAPER, scribble it out on PAPER first before typing in code
-
+/**
+ * Use SCRAP PAPER, scribble it out on PAPER first before typing in code
+ * Browse Commits: https://github.com/leoncheng57/Pacman-Project/commits/master/Pacman
+**/
 import java.util.*;
 import java.io.*;
 
