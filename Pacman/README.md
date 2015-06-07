@@ -47,3 +47,4 @@ DEVLOG
 * 6/4 - reorganized methods in MrPacman and Organism so that more of the methods are in the superclass Organism
 * 6/5 - began working on the Ghost and Node
 * 6/7 - Pacman can now only move in the center of the path
+* 6/7 - put nodes back into code

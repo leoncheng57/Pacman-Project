@@ -7,8 +7,7 @@ public class Organism {
   float speed;
   float size;
   
-  private Organism(){  //should this be private or public?
-  }
+  private Organism(){}  //should this be private or public?
 
   public Organism(float x, float y) {
     xCor = x;

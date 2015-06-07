@@ -6,7 +6,7 @@ import java.io.*;
 MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
-//ArrayList<Node> nodes;
+ArrayList<Node> nodes;
 char nextDirection;
 
 
@@ -17,7 +17,7 @@ public void setup() {
   pac = new MrPacman();
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
-  //nodes = new ArrayList<Node>();
+  nodes = new ArrayList<Node>();
   placeBlocks();
 }  
 
@@ -41,19 +41,18 @@ public void placeBlocks() {
     for (int r=0; r<blocksGrid[0].length;r++){
       if (blocksGrid[c][r]==1)
         blocks.add(new Block(r,c));   
-      //else 
-        //nodes.add(new Node(r,c));
+      else
+        nodes.add(new Node(r,c));
     }
   }
 }
 
 public void draw() {
   background(0); //TODO: make a var for background color and set it to that, or use an image
-    
-  reddy.drawMe();
   drawBlocks();
-  //drawNodes();
+  drawNodes();
   pac.drawMe();
+  reddy.drawMe();
   changeDirection();
   move();
 }
@@ -64,11 +63,11 @@ public void drawBlocks() {
   }
 }
   
-//  public void drawNodes(){
-//   for (Node n : nodes){
-//        n.drawMe();
-//    }
-//  }
+public void drawNodes(){
+  for (Node n : nodes){
+    n.drawMe();
+  }
+}
 
 public void move() {
   if (canMove()) pac.move();
