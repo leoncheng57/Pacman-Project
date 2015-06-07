@@ -3,7 +3,7 @@ public class Ghost extends Organism {
   boolean killable;
 
   public Ghost(){
-    xCor=width/2+20;
+    xCor=width/2;
     yCor=height/2;
     col=#b22222;
     size=25;

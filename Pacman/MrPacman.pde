@@ -2,7 +2,7 @@ public class MrPacman extends Organism {
 
   public MrPacman() {
     xCor = width/2+25; //starting position may be edited later
-    yCor = height/2+25;
+    yCor = height/2+25; //TODO: replace 25 (a magic number) with a var instead
     col = #FFE834;
     size = 25;
     speed = 5;

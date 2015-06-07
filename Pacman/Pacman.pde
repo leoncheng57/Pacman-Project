@@ -7,6 +7,9 @@ MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
 //ArrayList<Node> nodes;
+char nextDirection;
+
+
 public void setup() {
   background(0);
   size(700, 500);
@@ -82,13 +85,21 @@ public boolean canMove() {
   return true;
 }
 
-char nextDirection;
-
+//will only change direction when allowed (no more blocks in the way, in center of path)
 public void changeDirection(){
-  if (pac.getX()%50==25 && pac.getY()%50==25)
+  if (pac.getX()%50==25 && pac.getY()%50==25){
+    float size = pac.getSize();
+    for (Block b : blocks) {
+      if (nextDirection=='u' && b.isColliding(pac.getX(), pac.getY()-size)) return; 
+      else if (nextDirection=='d' && b.isColliding(pac.getX(), pac.getY()+size)) return; 
+      else if (nextDirection=='r' && b.isColliding(pac.getX()+size, pac.getY())) return; 
+      else if (nextDirection=='l' && b.isColliding(pac.getX()-size, pac.getY())) return;
+    }
     pac.setDirection(nextDirection);
+  }
 }
 
+//stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {
   if (key == CODED) {
     if (keyCode == UP) {
