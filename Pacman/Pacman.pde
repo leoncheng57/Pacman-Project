@@ -8,8 +8,9 @@ import java.io.*;
 MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
-ArrayList<Node> nodes;
+ArrayList<Tile> tiles;
 char nextDirection;
+int score;
 
 
 public void setup() {
@@ -19,21 +20,21 @@ public void setup() {
   pac = new MrPacman();
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
-  nodes = new ArrayList<Node>();
+  tiles = new ArrayList<Tile>();
   placeBlocks();
 }  
 
 int[][] stage1 = { //the one with the J and L logos
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,}, 
-    {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,}, 
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,}, 
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,}, 
 };
 
 public void placeBlocks() {
@@ -44,7 +45,7 @@ public void placeBlocks() {
       if (blocksGrid[c][r]==1)
         blocks.add(new Block(r,c));   
       else
-        nodes.add(new Node(r,c));
+        tiles.add(new Tile(r,c));
     }
   }
 }
@@ -52,11 +53,13 @@ public void placeBlocks() {
 public void draw() {
   background(0); //TODO: make a var for background color and set it to that, or use an image
   drawBlocks();
-  drawNodes();
+  drawTiles();
   pac.drawMe();
   reddy.drawMe();
   changeDirection();
   move();
+  earnPoints();
+  System.out.println(score);
 }
 
 public void drawBlocks() {
@@ -65,9 +68,9 @@ public void drawBlocks() {
   }
 }
   
-public void drawNodes(){
-  for (Node n : nodes){
-    n.drawMe();
+public void drawTiles(){
+  for (Tile t : tiles){
+    t.drawMe();
   }
 }
 
@@ -100,6 +103,16 @@ public void changeDirection(){
   }
 }
 
+public void earnPoints(){
+  for (Tile t:tiles){
+    if (t.getX()+t.getSize()/2==pac.getX() && t.getY()+t.getSize()/2==pac.getY()){
+      if (t.havePoints){
+      t.noPoints();
+      }
+    }
+  } 
+  
+}
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {
   if (key == CODED) {

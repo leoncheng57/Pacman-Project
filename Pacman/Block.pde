@@ -13,5 +13,11 @@ public class Block extends Node{
       y>=this.yCor &&
       y<=this.yCor+size);
   }
+  
+  public void drawMe() {
+    rectMode(CORNER);
+    fill(col);
+    rect(xCor, yCor, size, size);
+  }
 }
 
