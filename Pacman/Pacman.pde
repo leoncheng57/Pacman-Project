@@ -133,6 +133,7 @@ public void updatePac() {
 }
 
 
+
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {
   if (key == CODED) {
