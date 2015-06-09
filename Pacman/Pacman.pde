@@ -31,8 +31,8 @@ int[][] stage = { //the one with the J and L logos
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,}, 
@@ -115,8 +115,24 @@ public void earnPoints(){
       }
     }
   } 
-  
 }
+
+
+public void updatePac() {
+  if (pac.getX()%50==0 && pac.getY()%50==0) {
+    for (int c= 0; c<stage.length; c++) {
+      for (int r=0; r<stage[0].length; r++) {
+        if (stage[r][c]==2) {
+          stage[r][c]=0;
+        } else if (r==pac.getX()/50 && c==pac.getY()/50) {
+          stage[r][c]=2;
+        }
+      }
+    }
+  }
+}
+
+
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {
   if (key == CODED) {
