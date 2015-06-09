@@ -26,13 +26,13 @@ public void setup() {
   placeBlocks();
 }  
 
-int[][] stage1 = { //the one with the J and L logos
+int[][] stage = { //the one with the J and L logos
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,}, 
@@ -40,7 +40,7 @@ int[][] stage1 = { //the one with the J and L logos
 };
 
 public void placeBlocks() {
-  int[][] blocksGrid = stage1;
+  int[][] blocksGrid = stage;
   //Note: blocksGrid is a column-major array?
   for (int c= 0; c<blocksGrid.length;c++){
     for (int r=0; r<blocksGrid[0].length;r++){

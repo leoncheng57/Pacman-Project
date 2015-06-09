@@ -4,13 +4,29 @@ public class Node{
   float yCor;
   public static final float size = 50; //correct types for this var?
   color col;
-  private Node(){}
+  Node prev;
+  Node next;
 
+
+  private Node(){}
+  
   public Node(float x, float y) { //x and y are like coords for blocksGrid
     xCor = x*50;
     yCor = y*50;
     col = #D1C8C8;
     
+  }
+  public void setPrev(Node n){
+    prev=n; 
+  }
+  public void setNext(Node n){
+    next=n; 
+  }
+  public Node getPrev(){
+    return prev;
+  }
+  public Node getNext(){
+    return next; 
   }
   public float getX(){
     return xCor;

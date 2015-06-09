@@ -1,8 +1,14 @@
 public class MrPacman extends Organism {
 
   public MrPacman() {
-    xCor = width/2+25; //starting position may be edited later
-    yCor = height/2+25; //TODO: replace 25 (a magic number) with a var instead
+    for (int c= 0; c<stage.length; c++) {
+      for (int r=0; r<stage[0].length; r++) {
+        if (stage[c][r]=2) {
+          xCor=r; 
+          yCor=c;
+        }
+      }
+    }
     col = #FFE834;
     size = 25;
     speed = 5;
@@ -14,6 +20,5 @@ public class MrPacman extends Organism {
     if (direction == 'l') xCor-= speed;
     if (direction == 'r') xCor+= speed;
   }
-
 }
 
