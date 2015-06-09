@@ -8,8 +8,8 @@ import java.io.*;
 MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
-//ArrayList<Tile> tiles;
-ArrayList<Node> nodes;
+ArrayList<Tile> tiles;
+
 char nextDirection;
 int score;
 
@@ -21,8 +21,8 @@ public void setup() {
   pac = new MrPacman();
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
-  //tiles = new ArrayList<Tile>();
-  nodes = new ArrayList<Node>();
+  tiles = new ArrayList<Tile>();
+
   placeBlocks();
 }  
 
@@ -47,8 +47,8 @@ public void placeBlocks() {
       if (blocksGrid[c][r]==1)
         blocks.add(new Block(r,c));   
       else
-        //tiles.add(new Tile(r,c));
-        nodes.add(new Node(r,c));
+        tiles.add(new Tile(r,c));
+        
     }
   }
 }
@@ -56,13 +56,13 @@ public void placeBlocks() {
 public void draw() {
   background(0); //TODO: make a var for background color and set it to that, or use an image
   drawBlocks();
-  //drawTiles();
-  drawNodes();
+  drawTiles();
+  
   pac.drawMe();
   reddy.drawMe();
   changeDirection();
   move();
-  //earnPoints();
+  earnPoints();
   System.out.println(score);
 }
 
@@ -71,17 +71,13 @@ public void drawBlocks() {
     b.drawMe();
   }
 }
-  /*
+  
 public void drawTiles(){
   for (Tile t : tiles){
     t.drawMe();
   }
-}*/
-public void drawNodes(){
-  for(Node n:nodes){
-    n.drawMe();
-  }
 }
+
 public void move() {
   if (canMove()) pac.move();
 }
@@ -110,7 +106,7 @@ public void changeDirection(){
     pac.setDirection(nextDirection);
   }
 }
-/*
+
 public void earnPoints(){
   for (Tile t:tiles){
     if (t.getX()+t.getSize()/2==pac.getX() && t.getY()+t.getSize()/2==pac.getY()){
@@ -120,7 +116,7 @@ public void earnPoints(){
     }
   } 
   
-}*/
+}
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {
   if (key == CODED) {
