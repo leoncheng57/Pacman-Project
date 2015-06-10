@@ -48,3 +48,6 @@ DEVLOG
 * 6/5 - began working on the Ghost and Node
 * 6/7 - Pacman can now only move in the center of the path
 * 6/7 - put nodes back into code
+* 6/8 - made better, still working on ghost movement
+* 6/9 - organized some stuff
+* 6/10 - completed updatePac
