@@ -2,6 +2,7 @@
  * Use SCRAP PAPER, scribble it out on PAPER first before typing in code
  * Browse Commits: https://github.com/leoncheng57/Pacman-Project/commits/master/Pacman
 **/
+
 import java.util.*;
 import java.io.*;
 
@@ -22,8 +23,8 @@ public void setup() {
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
-
   placeBlocks();
+  
 }  
 
 int[][] stage = { //the one with the J and L logos
@@ -64,6 +65,7 @@ public void draw() {
   move();
   earnPoints();
   System.out.println(score);
+  updatePac();
 }
 
 public void drawBlocks() {
@@ -119,19 +121,24 @@ public void earnPoints(){
 
 
 public void updatePac() {
-  if (pac.getX()%50==0 && pac.getY()%50==0) {
+  if (pac.getX()%50==25 && pac.getY()%50==25) {
     for (int c= 0; c<stage.length; c++) {
       for (int r=0; r<stage[0].length; r++) {
-        if (stage[r][c]==2) {
-          stage[r][c]=0;
-        } else if (r==pac.getX()/50 && c==pac.getY()/50) {
-          stage[r][c]=2;
+        println("x: "+pac.getX()+"y: "+pac.getY());
+        if (stage[c][r]==2) {
+          stage[c][r]=0;
+          println("r: "+r+"c: "+c);
+        } else if (r==(pac.getX()-25)/50 && c==(pac.getY()-25)/50) {
+          stage[c][r]=2;
         }
       }
     }
   }
+//  for(int[] a : stage){
+//    println(Arrays.toString(a));
+//  }
+//  println();
 }
-
 
 
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
