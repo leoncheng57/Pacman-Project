@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Maze 
 {
-   //private char[][] stage;
+   //private char[][] stageCopy;
   private int maxX;
   private int maxY;
 
@@ -13,8 +13,13 @@ public class Maze
   private int exit=2;
   private int visited = 4;
   private boolean solved = false;
+  private int[][] stageCopy;
 
   private Frontier f;
+
+  public Maze(){
+    stageCopy = stage; 
+  }
 
   public void delay(int n) {
     try {
@@ -32,7 +37,7 @@ public class Maze
     for (int y=0; y<maxY; y++)
     {
       for (int x=0; x<maxX; x++)
-        s = s +stage[x][y];
+        s = s +stageCopy[x][y];
       s=s+"\n";
     }
     return s;
@@ -43,7 +48,6 @@ public class Maze
    
    */
   public void solve(int x, int y) {
-    int[][] stageCopy=stage;
     y = (y-25)/50; //TODO: make method to do this
     x = (x-25)/50;
     if (stageCopy[x][y]==wall || 
@@ -58,16 +62,22 @@ public class Maze
       solved = true;
     }
     
-    delay(100);
+    //delay(100);
     //System.out.println(this);
-    stage[x][y]=me;
+    stageCopy[x][y]=me;
+    //TODO: convertind numbers ERROR , have to fix
     solve(x+1, y);
     solve(x-1, y);
     solve(x, y+1);
     solve(x, y-1);
     if (!solved) {
-      stage[x][y]=visited;
+      stageCopy[x][y]=visited;
     }
+    println("im here!");
+    for (int[] a : stageCopy){
+      println(Arrays.toString(a));
+    }
+    println();
   }
 
   /*
@@ -75,7 +85,7 @@ public class Maze
    */
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
-    if (stage[tx][ty]=='#' || stage[tx][ty]=='$') {
+    if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {
       tmp = new Node(tx, ty);
       tmp.setPrev(current);
       f.add(tmp);
@@ -95,10 +105,10 @@ public class Maze
       int cx = (int)current.getX();
       int cy = (int)current.getY();
 
-      if (stage[cx][cy]=='$')
+      if (stageCopy[cx][cy]=='$')
         break;
 
-      stage[cx][cy]='z';
+      stageCopy[cx][cy]='z';
 
       addToFront(cx+1, cy, current);
       addToFront(cx-1, cy, current);
@@ -111,7 +121,7 @@ public class Maze
 
     // path recovery
     for (Node p = current.getPrev (); p != null; p = p.getPrev()) {
-      stage[(int)p.getX()][(int)p.getY()] = 'P';
+      stageCopy[(int)p.getX()][(int)p.getY()] = 'P';
       delay(100);
       System.out.println(this);
     }
