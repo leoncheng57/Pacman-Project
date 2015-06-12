@@ -67,7 +67,15 @@ public void draw() {
   //println("score: "+score);
   updatePac();
   Maze m = new Maze();
-  m.solve(125,125);
+  m.solve(375,275);
+  //printStage();
+}
+
+public void printStage(){
+  for (int[] a : stage){
+    println(Arrays.toString(a));
+  } 
+  println();
 }
 
 public void drawBlocks() {
@@ -130,7 +138,7 @@ public void updatePac() {
         if (stage[c][r]==2) {
           stage[c][r]=0;
           //println("r: "+r+"c: "+c);
-        } else if (r==(pac.getX()-25)/50 && c==(pac.getY()-25)/50) {
+        } if (r==(pac.getX()-25)/50 && c==(pac.getY()-25)/50) {
           stage[c][r]=2;
         }
       }

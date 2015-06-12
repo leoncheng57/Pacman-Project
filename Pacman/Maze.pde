@@ -52,6 +52,9 @@ public class Maze
     int oldY = y;
     y = (y-25)/50; //TODO: make method to do this
     x = (x-25)/50;
+    if (x<0 || x>=stageCopy.length || y<0 || y>=stageCopy[0].length){
+      return;
+    }
     if (stageCopy[x][y]==wall || 
       stageCopy[x][y]==me ||
       stageCopy[x][y]==visited ||
@@ -68,14 +71,14 @@ public class Maze
     //System.out.println(this);
     stageCopy[x][y]=me;
     //TODO: convertind numbers ERROR , have to fix
-    solve(oldX+1, oldY);
-    solve(oldX-1, oldY);
-    solve(oldX, oldY+1);
-    solve(oldX, oldY-1);
+    solve(oldX+50, oldY);
+    solve(oldX-50, oldY);
+    solve(oldX, oldY+50);
+    solve(oldX, oldY-50);
     if (!solved) {
       stageCopy[x][y]=visited;
     }
-    println("im here!");
+    println("im here!" + millis());
     for (int[] a : stageCopy){
       println(Arrays.toString(a));
     }
