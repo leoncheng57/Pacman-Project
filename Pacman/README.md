@@ -51,3 +51,5 @@ DEVLOG
 * 6/8 - made better, still working on ghost movement
 * 6/9 - organized some stuff
 * 6/10 - completed updatePac
+* 6/11 - still working on solve
+* 6/12 - made some progress on solve
