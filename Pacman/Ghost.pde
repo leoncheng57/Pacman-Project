@@ -31,16 +31,16 @@ public class Ghost extends Organism {
   public void changeDirection(){
     int xCor = getSmallX();
     int yCor = getSmallY();
-    if (isPath(xCor+1,yCor)) setDirection('r');
-    else if (isPath(xCor-1,yCor)) setDirection('l');
+    if (isPath(xCor-1,yCor)) setDirection('r');
+    else if (isPath(xCor+1,yCor)) setDirection('l');
     else if (isPath(xCor,yCor+1)) setDirection('d');
     else if (isPath(xCor,yCor-1)) setDirection('u');
   }
   
   public boolean isPath(int x, int y){
-    if (x>=0 || x<stageCopy.length || y>=0 || y<stageCopy[0].length){
-      println(x);
-      println(y);
+    if (x>=0 && x<stageCopy.length && y>=0 && y<stageCopy[0].length){
+      println(x+": "+stageCopy.length);
+      println(y+": "+stageCopy[0].length);
       if (stageCopy[x][y] == 3)
         return true;
     }
