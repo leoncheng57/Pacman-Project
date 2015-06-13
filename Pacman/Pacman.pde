@@ -67,7 +67,7 @@ public void draw() {
   //println("score: "+score);
   updatePac();
   
-  //m.solve(225,275);
+  m.solve(225,275);
   
   //m.solve((int)reddy.getX(),(int)reddy.getY());
   //printStage();

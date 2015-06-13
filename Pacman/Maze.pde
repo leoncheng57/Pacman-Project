@@ -48,6 +48,7 @@ public class Maze
    
    */
   public void solve(int x, int y) {
+    stageCopy = stage;
     int oldX = x;
     int oldY = y;
     y = (y-25)/50; //TODO: make method to do this
