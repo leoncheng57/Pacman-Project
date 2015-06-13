@@ -6,6 +6,12 @@ email him by ***Mon*** morning
 - with projected finish date
 - but you must show (through commits) that you have actually made work with the time you were given
 
+To include in README
+- name of the proejct
+- who worked on it
+- instructions to run
+- anything else I should know.
+
 TODO
 ----
 * make the stage
