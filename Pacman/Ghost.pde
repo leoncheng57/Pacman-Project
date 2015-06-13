@@ -21,10 +21,11 @@ public class Ghost extends Organism {
     Maze m = new Maze();
   }
 
-  public void getStageCopy(){
+  public void getPathReady(){
     if (this.getX()%50==25 && this.getY()%50==25){
       m.solve((int)this.getX(),(int)this.getY());
-      stageCopy = Maze.solve((int)this.getX(), (int)this.getY());
+      stageCopy = m.getStageCopy();
+    }
   }
   
   public void changeDirection(){

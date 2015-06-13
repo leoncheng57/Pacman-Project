@@ -60,19 +60,18 @@ public void draw() {
   drawTiles();
   
   pac.drawMe();
-  reddy.drawMe();
   changeDirection();
   move();
   earnPoints();
   //println("score: "+score);
   updatePac();
   
-  //m.solve(225,275);
-//  reddy.getPathReady();
-//  reddy.changeDirection();
-//  reddy.move();
-//  reddy.updatePath();
+  reddy.drawMe();
+ //reddy.getPathReady();
+  reddy.changeDirection();
+  reddy.move();
   //m.solve((int)reddy.getX(),(int)reddy.getY());
+  //m.solve(225,275);
   //printStage();
 }
 

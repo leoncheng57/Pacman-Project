@@ -25,7 +25,7 @@ public class Maze
       solved - instance variable to indicate we're done
    
    */
-  public int[][] solve(int x, int y) {
+  public void solve(int x, int y) {
     stageCopy = stage;
     int oldX = x;
     int oldY = y;
@@ -71,7 +71,6 @@ public class Maze
       println(Arrays.toString(a));
     }
     println();*/
-    return stageCopy;
   }
 
   /*
