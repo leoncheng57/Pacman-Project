@@ -1,8 +1,8 @@
 NOTES
 =====
 
-if you want a **proj extension**
-email him by Mon morning
+if you want a ***proj extension***
+email him by ***Mon*** morning
 - with projected finish date
 - but you must show (through commits) that you have actually made work with the time you were given
 
