@@ -52,24 +52,36 @@ public class Maze
     int oldY = y;
     y = (y-25)/50; //TODO: make method to do this
     x = (x-25)/50;
+    //println("x is" +x);
+    //println("y is" +y);
+   // println("stagecopy "+ x+","+y+ " is " +stageCopy[x][y]);
+    //println("here");
     if (x<0 || x>=stageCopy.length || y<0 || y>=stageCopy[0].length){
       return;
     }
+   // println("and here");
     if (stageCopy[x][y]==wall || 
       stageCopy[x][y]==me ||
       stageCopy[x][y]==visited ||
       solved) {
       return;
     }
-
+   // println("down here");
     if (stageCopy[x][y]==exit) {
       //System.out.println(this);
+      
       solved = true;
+      
     }
     
     //delay(100);
     //System.out.println(this);
     stageCopy[x][y]=me;
+     println("im here!" + millis());
+    for (int[] a : stageCopy){
+      println(Arrays.toString(a));
+    }
+    println();
     //TODO: convertind numbers ERROR , have to fix
     solve(oldX+50, oldY);
     solve(oldX-50, oldY);
@@ -78,16 +90,19 @@ public class Maze
     if (!solved) {
       stageCopy[x][y]=visited;
     }
-    println("im here!" + millis());
+    /*println("im here!" + millis());
     for (int[] a : stageCopy){
       println(Arrays.toString(a));
     }
-    println();
+    println();*/
   }
 
   /*
       Only adds if the tx,ty spot is available path or exit
    */
+  public int[][] getPath(){
+     return stageCopy; 
+  }
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
     if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {

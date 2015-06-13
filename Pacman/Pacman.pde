@@ -10,7 +10,7 @@ MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
-
+Maze m = new Maze();
 char nextDirection;
 int score;
 
@@ -32,7 +32,7 @@ int[][] stage = { //the one with the J and L logos
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 2, 0, 5, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
@@ -66,8 +66,10 @@ public void draw() {
   earnPoints();
   //println("score: "+score);
   updatePac();
-  Maze m = new Maze();
-  m.solve(375,275);
+  
+  //m.solve(225,275);
+  
+  //m.solve((int)reddy.getX(),(int)reddy.getY());
   //printStage();
 }
 
