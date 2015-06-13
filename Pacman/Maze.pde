@@ -25,7 +25,7 @@ public class Maze
       solved - instance variable to indicate we're done
    
    */
-  public static int[][] solve(int x, int y) {
+  public int[][] solve(int x, int y) {
     stageCopy = stage;
     int oldX = x;
     int oldY = y;
@@ -84,6 +84,10 @@ public class Maze
       tmp.setPrev(current);
       f.add(tmp);
     }
+  }
+  
+  public int[][] getStageCopy(){
+    return stageCopy;
   }
 
   public void bfs(int x, int y) {

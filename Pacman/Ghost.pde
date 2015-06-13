@@ -2,6 +2,7 @@ public class Ghost extends Organism {
 
   boolean killable;
   private int[][] stageCopy;
+  Maze m;
   
   public Ghost(){     
     for (int c= 0; c<stage.length; c++) {
@@ -17,17 +18,12 @@ public class Ghost extends Organism {
     speed = 5;  
     killable=false;
     setDirection('l');
+    Maze m = new Maze();
   }
 
-//  public void getPathReady(){
-//     path = m.getPath((int)xCor,(int)yCor);
-//  }
-
-  public void updatePath(){
-//    if (this.getX()%50==25 && this.getY()%50==25){
-//      m.solve((int)this.getX(),(int)this.getY());
-//      getPathReady();
-//    }
+  public void getStageCopy(){
+    if (this.getX()%50==25 && this.getY()%50==25){
+      m.solve((int)this.getX(),(int)this.getY());
       stageCopy = Maze.solve((int)this.getX(), (int)this.getY());
   }
   
