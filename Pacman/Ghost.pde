@@ -2,7 +2,7 @@ public class Ghost extends Organism {
 
   boolean killable;
   private int[][] stageCopy;
-  Maze m;
+  private Maze m;
   
   public Ghost(){     
     for (int c= 0; c<stage.length; c++) {
@@ -18,7 +18,7 @@ public class Ghost extends Organism {
     speed = 5;  
     killable=false;
     setDirection('l');
-    Maze m = new Maze();
+    m = new Maze();
   }
 
   public void getPathReady(){
@@ -29,14 +29,18 @@ public class Ghost extends Organism {
   }
   
   public void changeDirection(){
-    if (isPath((int)xCor+1,(int)yCor)) setDirection('r');
-    else if (isPath((int)xCor-1,(int)yCor)) setDirection('l');
-    else if (isPath((int)xCor,(int)yCor+1)) setDirection('d');
-    else if (isPath((int)xCor,(int)yCor-1)) setDirection('u');
+    int xCor = getSmallX();
+    int yCor = getSmallY();
+    if (isPath(xCor+1,yCor)) setDirection('r');
+    else if (isPath(xCor-1,yCor)) setDirection('l');
+    else if (isPath(xCor,yCor+1)) setDirection('d');
+    else if (isPath(xCor,yCor-1)) setDirection('u');
   }
   
   public boolean isPath(int x, int y){
     if (x>=0 || x<stageCopy.length || y>=0 || y<stageCopy[0].length){
+      println(x);
+      println(y);
       if (stageCopy[x][y] == 3)
         return true;
     }

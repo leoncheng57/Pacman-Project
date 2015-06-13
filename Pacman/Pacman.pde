@@ -23,8 +23,8 @@ public void setup() {
   reddy= new Ghost();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
+
   placeBlocks();
-  
 }  
 
 int[][] stage = { //the one with the J and L logos
@@ -67,7 +67,7 @@ public void draw() {
   updatePac();
   
   reddy.drawMe();
- //reddy.getPathReady();
+  reddy.getPathReady();
   reddy.changeDirection();
   reddy.move();
   //m.solve((int)reddy.getX(),(int)reddy.getY());

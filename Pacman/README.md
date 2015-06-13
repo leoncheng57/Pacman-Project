@@ -18,6 +18,7 @@ TODO
 * make ghosts
 * make dots fill the board
 * make Pacman move/not move in relation to blocks
+* (put in Organism constructor) convert big x and y to little x and y here first
 
 Questions
 ---------

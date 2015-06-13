@@ -46,4 +46,12 @@ public class Organism {
     if (direction == 'l') xCor-= speed;
     if (direction == 'r') xCor+= speed;
   }
+  
+  public int getSmallX(){
+    return (int)((this.getX()-25)/50);
+  }
+  
+  public int getSmallY(){
+    return (int)((this.getY()-25)/50);
+  }
 }

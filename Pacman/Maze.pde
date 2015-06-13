@@ -1,8 +1,4 @@
-import java.io.*;
-import java.util.*;
-
-public class Maze 
-{
+public class Maze {
    //private char[][] stageCopy;
   private int maxX;
   private int maxY;
