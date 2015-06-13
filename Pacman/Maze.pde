@@ -101,9 +101,11 @@ public class Maze
   /*
       Only adds if the tx,ty spot is available path or exit
    */
-  public int[][] getPath(){
-     return stageCopy; 
+  public int[][] getPath(int xCor, int yCor){
+     solve(xCor,yCor);
+     return stageCopy;
   }
+  
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
     if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {
