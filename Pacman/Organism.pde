@@ -38,4 +38,12 @@ public class Organism {
   public float getY() {
     return yCor;
   }
+  
+  
+  public void move() {
+    if (direction == 'u') yCor-= speed; //change everything in this class to gets and sets? ex. getDirection()=='u'
+    if (direction == 'd') yCor+= speed;
+    if (direction == 'l') xCor-= speed;
+    if (direction == 'r') xCor+= speed;
+  }
 }

@@ -68,10 +68,10 @@ public void draw() {
   updatePac();
   
   //m.solve(225,275);
-  reddy.getPathReady();
-  reddy.changeDirection();
-  reddy.move();
-  reddy.updatePath();
+//  reddy.getPathReady();
+//  reddy.changeDirection();
+//  reddy.move();
+//  reddy.updatePath();
   //m.solve((int)reddy.getX(),(int)reddy.getY());
   //printStage();
 }

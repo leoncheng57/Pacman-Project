@@ -14,12 +14,5 @@ public class MrPacman extends Organism {
     col = #FFE834;
     speed = 5;
   }
-
-  public void move() {
-    if (direction == 'u') yCor-= speed; //change everything in this class to gets and sets? ex. getDirection()=='u'
-    if (direction == 'd') yCor+= speed;
-    if (direction == 'l') xCor-= speed;
-    if (direction == 'r') xCor+= speed;
-  }
 }
 

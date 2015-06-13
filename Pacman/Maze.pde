@@ -21,33 +21,11 @@ public class Maze
     stageCopy = stage; 
   }
 
-  public void delay(int n) {
-    try {
-      Thread.sleep(n);
-    } 
-    catch (Exception e) {
-    }
-  }
-
-
-  public String toString()
-  {
-    String s = "[2J\n";
-
-    for (int y=0; y<maxY; y++)
-    {
-      for (int x=0; x<maxX; x++)
-        s = s +stageCopy[x][y];
-      s=s+"\n";
-    }
-    return s;
-  }
-
   /*
       solved - instance variable to indicate we're done
    
    */
-  public void solve(int x, int y) {
+  public static int[][] solve(int x, int y) {
     stageCopy = stage;
     int oldX = x;
     int oldY = y;
@@ -70,11 +48,8 @@ public class Maze
    // println("down here");
     if (stageCopy[x][y]==exit) {
       //System.out.println(this);
-      
       solved = true;
-      
     }
-    
     //delay(100);
     //System.out.println(this);
     stageCopy[x][y]=me;
@@ -96,16 +71,12 @@ public class Maze
       println(Arrays.toString(a));
     }
     println();*/
+    return stageCopy;
   }
 
   /*
       Only adds if the tx,ty spot is available path or exit
    */
-  public int[][] getPath(int xCor, int yCor){
-     solve(xCor,yCor);
-     return stageCopy;
-  }
-  
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
     if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {
