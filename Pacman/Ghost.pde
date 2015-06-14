@@ -23,6 +23,7 @@ public class Ghost extends Organism {
 
   public void followPath(){
     if (this.getX()%50==25 && this.getY()%50==25){
+      println();
       println("inside followPath");
       println("x: "+this.getX());
       println("y: "+this.getY());

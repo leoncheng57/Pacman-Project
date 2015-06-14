@@ -83,7 +83,7 @@ public class Maze {
   /*
       Only adds if the tx,ty spot is available path or exit
    */
-   /*
+   
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
     if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {
@@ -120,7 +120,7 @@ public class Maze {
       System.out.println(this);
     }
   }
-  */
+  
   
   public int[][] getStageCopy(){
     println("inside getStageCopy");
