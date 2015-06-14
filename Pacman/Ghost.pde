@@ -22,34 +22,40 @@ public class Ghost extends Organism {
   }
 
   public void followPath() {
-    if (this.getX()%50==25 && this.getY()%50==25) {
-      //println("inside followPath");
-      //println("x: "+this.getX());
-      //println("y: "+this.getY());
-      //println(millis());
-      
-      m.bfs((int)this.getSmallY(), (int)this.getSmallX());
-      //m.solve((int)this.getSmallY(), (int)this.getSmallX());
-      //println("x: "+this.getSmallX());
-      //println("y: "+this.getSmallY());
-      stageCopy = m.getStageCopy();
-      //for (int[] a : stageCopy){
-      //  println(Arrays.toString(a));
-      //}
-      changeDirection();  
-      //println(this.getDirection());
-    }
+    //println("inside followPath");
+    //println("x: "+this.getX());
+    //println("y: "+this.getY());
+    //println(millis());
+    m.bfs((int)this.getSmallY(), (int)this.getSmallX());
+    //m.solve((int)this.getSmallY(), (int)this.getSmallX());
+    //println("x: "+this.getSmallX());
+    //println("y: "+this.getSmallY());
+    stageCopy = m.getStageCopy();
+    //for (int[] a : stageCopy){
+    //  println(Arrays.toString(a));
+    //}
+    changeDirection();  
+    //println(this.getDirection());
   }
 
 
   public void changeDirection() {
-    int xCor = getSmallX();
-    int yCor = getSmallY();
-    if (isPath(xCor-1, yCor)) setDirection('l');
-    else if (isPath(xCor+1, yCor)) setDirection('r');
-    else if (isPath(xCor, yCor+1)) setDirection('d');
-    else if (isPath(xCor, yCor-1)) setDirection('u');
-    println("inside changeDirection");
+    if (this.getX()%50==25 && this.getY()%50==25) {
+
+      //    float x = m.nextNode.getX();
+      //    float y = m.nextNode.getY();
+      //    if (x<this.getX()) setDirection('l');
+      //    else if (x>this.getX()) setDirection('r');
+      //    else if (Y<this.getY()) setDirection('d');
+      //    else if (y<this.getY()) setDirection('u');
+      int xCor = getSmallX();
+      int yCor = getSmallY();
+      if (isPath(xCor-1, yCor)) setDirection('l');
+      else if (isPath(xCor+1, yCor)) setDirection('r');
+      else if (isPath(xCor, yCor-1)) setDirection('u');
+      else if (isPath(xCor, yCor+1)) setDirection('d');
+      println("inside changeDirection");
+    }
   }
 
   public boolean isPath(int x, int y) {

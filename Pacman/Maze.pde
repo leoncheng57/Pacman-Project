@@ -21,6 +21,7 @@ public class Maze {
   private int visited = 4;
   private boolean solved = false;
   private int[][] stageCopy;
+  public Node nextNode; //TODO: make this public, and make its get method
 
   public void solve(int x, int y) {
     copyOverStage();
@@ -92,6 +93,8 @@ public class Maze {
       addToFront(cx, cy-1, current);
     }
     println(f);
+    //maybe this will store the next location that the ghost is supposed to move to 
+    nextNode=current;
     //path recovery
     for (Node p = current.getPrev (); p!=null; p = p.getPrev()) {
       stageCopy[(int)p.getX()][(int)p.getY()]=visited; //is this supposed ot be visited?
@@ -100,6 +103,7 @@ public class Maze {
       println(Arrays.toString(a));
     }
   }
+  
 
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
