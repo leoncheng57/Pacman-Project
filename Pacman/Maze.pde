@@ -19,14 +19,18 @@ public class Maze {
          stageCopy[c][r] = stage[c][r];
       }
     }
+    println("inside copyOverStage");
   }  
 
   public void solve(int x, int y){
     copyOverStage();
     //println("should be orig"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    println("inside solve before solveHelper");
     solveHelper(x,y);
-    //println("COPY"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
-    println("ORIG"); for (int[] a:stage){println(Arrays.toString(a));} println();
+    println("inside solve after solveHelper");
+    println(millis());
+    println("about to print stageCopy after copyOverStage"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    //println("ORIG"); for (int[] a:stage){println(Arrays.toString(a));} println();
   }
   
   public void solveHelper(int x, int y){  
