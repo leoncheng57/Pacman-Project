@@ -21,26 +21,33 @@ public class Ghost extends Organism {
     m = new Maze();
   }
 
-  public void getPathReady(){
+  public void followPath(){
     if (this.getX()%50==25 && this.getY()%50==25){
-      m.solve((int)this.getX(),(int)this.getY());
+      //println("AIIGHT");
+      m.solve((int)this.getY(),(int)this.getX());
+      //println("x: "+this.getSmallX());
+      //println("y: "+this.getSmallY());
       stageCopy = m.getStageCopy();
+      //for (int[] a : stageCopy){
+      //  println(Arrays.toString(a));
+      //}
+      changeDirection();  
+      //println(this.getDirection());
     }
   }
+  
   
   public void changeDirection(){
     int xCor = getSmallX();
     int yCor = getSmallY();
-    if (isPath(xCor-1,yCor)) setDirection('r');
-    else if (isPath(xCor+1,yCor)) setDirection('l');
+    if (isPath(xCor-1,yCor)) setDirection('l');
+    else if (isPath(xCor+1,yCor)) setDirection('r');
     else if (isPath(xCor,yCor+1)) setDirection('d');
     else if (isPath(xCor,yCor-1)) setDirection('u');
   }
   
   public boolean isPath(int x, int y){
     if (x>=0 && x<stageCopy.length && y>=0 && y<stageCopy[0].length){
-      println(x+": "+stageCopy.length);
-      println(y+": "+stageCopy[0].length);
       if (stageCopy[x][y] == 3)
         return true;
     }

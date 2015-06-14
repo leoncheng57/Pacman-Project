@@ -10,7 +10,7 @@ MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
-Maze m = new Maze();
+Maze m;
 char nextDirection;
 int score;
 
@@ -25,6 +25,13 @@ public void setup() {
   tiles = new ArrayList<Tile>();
 
   placeBlocks();
+  m = new Maze();
+  
+  //
+//  drawBlocks();
+//  drawTiles();
+//  pac.drawMe();
+//  m.solve(75,75);
 }  
 
 int[][] stage = { //the one with the J and L logos
@@ -54,6 +61,7 @@ public void placeBlocks() {
   }
 }
 
+
 public void draw() {
   background(0); //TODO: make a var for background color and set it to that, or use an image
   drawBlocks();
@@ -67,13 +75,14 @@ public void draw() {
   updatePac();
   
   reddy.drawMe();
-  reddy.getPathReady();
-  reddy.changeDirection();
+  if (millis()<1000) m.solve(225,275);
+  reddy.followPath();
   reddy.move();
   //m.solve((int)reddy.getX(),(int)reddy.getY());
   //m.solve(225,275);
   //printStage();
 }
+
 
 public void printStage(){
   for (int[] a : stage){

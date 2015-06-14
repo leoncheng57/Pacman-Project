@@ -1,8 +1,4 @@
 public class Maze {
-   //private char[][] stageCopy;
-  private int maxX;
-  private int maxY;
-
   private int path=0;
   private int wall=1;
   private int me=3;
@@ -14,23 +10,30 @@ public class Maze {
   private Frontier f;
 
   public Maze(){
-    stageCopy = stage; 
   }
 
-  /*
-      solved - instance variable to indicate we're done
-   
-   */
-  public void solve(int x, int y) {
-    stageCopy = stage;
+  public void copyOverStage(){
+    stageCopy = new int[stage.length][stage[0].length];
+    for (int c= 0; c<stage.length; c++) {
+      for (int r=0; r<stage[0].length; r++) {
+         stageCopy[c][r] = stage[c][r];
+      }
+    }
+  }  
+
+  public void solve(int x, int y){
+    copyOverStage();
+    for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    solveHelper(x,y);
+    for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    for (int[] a:stage){println(Arrays.toString(a));} println();
+  }
+  
+  public void solveHelper(int x, int y){  
     int oldX = x;
     int oldY = y;
-    y = (y-25)/50; //TODO: make method to do this
+    y = (y-25)/50;
     x = (x-25)/50;
-    //println("x is" +x);
-    //println("y is" +y);
-   // println("stagecopy "+ x+","+y+ " is " +stageCopy[x][y]);
-    //println("here");
     if (x<0 || x>=stageCopy.length || y<0 || y>=stageCopy[0].length){
       return;
     }
@@ -49,16 +52,12 @@ public class Maze {
     //delay(100);
     //System.out.println(this);
     stageCopy[x][y]=me;
-     println("im here!" + millis());
-    for (int[] a : stageCopy){
-      println(Arrays.toString(a));
-    }
-    println();
+    //println("im running solve!" + millis());
     //TODO: convertind numbers ERROR , have to fix
-    solve(oldX+50, oldY);
-    solve(oldX-50, oldY);
-    solve(oldX, oldY+50);
-    solve(oldX, oldY-50);
+    solveHelper(oldX+50, oldY );
+    solveHelper(oldX-50, oldY );
+    solveHelper(oldX, oldY+50 );
+    solveHelper(oldX, oldY-50 );
     if (!solved) {
       stageCopy[x][y]=visited;
     }
@@ -67,6 +66,12 @@ public class Maze {
       println(Arrays.toString(a));
     }
     println();*/
+    //printing below:
+    //for (int[] a : stageCopy){
+    //  println(Arrays.toString(a));
+    //}
+    //println(millis());
+    //println();
   }
 
   /*
@@ -80,38 +85,27 @@ public class Maze {
       f.add(tmp);
     }
   }
-  
-  public int[][] getStageCopy(){
-    return stageCopy;
-  }
 
   public void bfs(int x, int y) {
     f = new Frontier(); // queue
     //f = new StackFront();
-
     f.add(new Node(x, y));
-
     int tx=0, ty=0;
     Node current = null;
     while (!f.isEmpty ()) {
       current = f.remove();
       int cx = (int)current.getX();
       int cy = (int)current.getY();
-
       if (stageCopy[cx][cy]=='$')
         break;
-
       stageCopy[cx][cy]='z';
-
       addToFront(cx+1, cy, current);
       addToFront(cx-1, cy, current);
       addToFront(cx, cy+1, current);
       addToFront(cx, cy-1, current);
-
       delay(50);
       System.out.println(this);
     }
-
     // path recovery
     for (Node p = current.getPrev (); p != null; p = p.getPrev()) {
       stageCopy[(int)p.getX()][(int)p.getY()] = 'P';
@@ -119,5 +113,11 @@ public class Maze {
       System.out.println(this);
     }
   }
+  
+  public int[][] getStageCopy(){
+    return stageCopy;
+  }
+
+  
 }
 
