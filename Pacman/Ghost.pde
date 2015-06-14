@@ -23,8 +23,10 @@ public class Ghost extends Organism {
 
   public void followPath(){
     if (this.getX()%50==25 && this.getY()%50==25){
-      println(millis());
       println("inside followPath");
+      println("x: "+this.getX());
+      println("y: "+this.getY());
+      println(millis());
       m.solve((int)this.getY(),(int)this.getX());
       //println("x: "+this.getSmallX());
       //println("y: "+this.getSmallY());
@@ -45,6 +47,7 @@ public class Ghost extends Organism {
     else if (isPath(xCor+1,yCor)) setDirection('r');
     else if (isPath(xCor,yCor+1)) setDirection('d');
     else if (isPath(xCor,yCor-1)) setDirection('u');
+    println("inside changeDirection");
   }
   
   public boolean isPath(int x, int y){

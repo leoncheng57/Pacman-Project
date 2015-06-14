@@ -29,11 +29,12 @@ public class Maze {
     solveHelper(x,y);
     println("inside solve after solveHelper");
     println(millis());
-    println("about to print stageCopy after copyOverStage"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    //println("about to print stageCopy"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
     //println("ORIG"); for (int[] a:stage){println(Arrays.toString(a));} println();
   }
   
   public void solveHelper(int x, int y){  
+    println("inside solveHelper");
     int oldX = x;
     int oldY = y;
     y = (y-25)/50;
@@ -78,9 +79,11 @@ public class Maze {
     //println();
   }
 
+  
   /*
       Only adds if the tx,ty spot is available path or exit
    */
+   /*
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;
     if (stageCopy[tx][ty]=='#' || stageCopy[tx][ty]=='$') {
@@ -117,8 +120,10 @@ public class Maze {
       System.out.println(this);
     }
   }
+  */
   
   public int[][] getStageCopy(){
+    println("inside getStageCopy");
     return stageCopy;
   }
 
