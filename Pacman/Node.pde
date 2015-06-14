@@ -1,5 +1,5 @@
-public class Node{
-  
+public class Node {
+
   float xCor;
   float yCor;
   public static final float size = 50; //correct types for this var?
@@ -8,39 +8,42 @@ public class Node{
   Node next;
 
 
-  private Node(){}
-  
-  public Node(float x, float y) { //x and y are like coords for blocksGrid
-    xCor = x*50;
-    yCor = y*50;
+  private Node() {
+  }
+
+  public Node(float x, float y) {
+    xCor = x;
+    yCor = y;
     col = #D1C8C8;
-    
   }
-  public void setPrev(Node n){
-    prev=n; 
+  public void setPrev(Node n) {
+    prev=n;
   }
-  public void setNext(Node n){
-    next=n; 
+  public void setNext(Node n) {
+    next=n;
   }
-  public Node getPrev(){
+  public Node getPrev() {
     return prev;
   }
-  public Node getNext(){
-    return next; 
+  public Node getNext() {
+    return next;
   }
-  public float getX(){
+  public float getX() {
     return xCor;
   }
-  public float getY(){
+  public float getY() {
     return yCor;
   }
-  public float getSize(){
-    return size; 
+  public float getSize() {
+    return size;
   }
   public void drawMe() {
     rectMode(CORNER);
     fill(col);
     rect(xCor, yCor, size, size);
-    
+  }
+  public String toString(){
+    return "("+xCor + ", " +yCor+")";
   }
 }
+
