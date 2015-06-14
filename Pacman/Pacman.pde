@@ -73,6 +73,7 @@ public void draw() {
   earnPoints();
   //println("score: "+score);
   updatePac();
+  updateReddy();
   
   reddy.drawMe();
   if (millis()<1000) m.solve(225,275);
@@ -157,12 +158,23 @@ public void updatePac() {
       }
     }
   }
-//  for(int[] a : stage){
-//    println(Arrays.toString(a));
-//  }
-//  println();
 }
 
+public void updateReddy() {
+  if (reddy.getX()%50==25 && reddy.getY()%50==25) {
+    for (int c= 0; c<stage.length; c++) {
+      for (int r=0; r<stage[0].length; r++) {
+        //println("x: "+pac.getX()+"y: "+pac.getY());
+        if (stage[c][r]==5) {
+          stage[c][r]=0;
+          //println("r: "+r+"c: "+c);
+        } if (r==(reddy.getX()-25)/50 && c==(reddy.getY()-25)/50) {
+          stage[c][r]=5;
+        }
+      }
+    }
+  }
+}
 
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
 public void keyPressed() {

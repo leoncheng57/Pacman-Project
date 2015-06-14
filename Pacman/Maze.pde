@@ -23,10 +23,10 @@ public class Maze {
 
   public void solve(int x, int y){
     copyOverStage();
-    for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    //println("should be orig"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
     solveHelper(x,y);
-    for (int[] a:stageCopy){println(Arrays.toString(a));} println();
-    for (int[] a:stage){println(Arrays.toString(a));} println();
+    //println("COPY"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
+    println("ORIG"); for (int[] a:stage){println(Arrays.toString(a));} println();
   }
   
   public void solveHelper(int x, int y){  
