@@ -21,8 +21,12 @@ public class Maze {
   private int visited = 4;
   private boolean solved = false;
   private int[][] stageCopy;
+  public int[][] stageCopy2;
   public Node nextNode; //TODO: make this public, and make its get method
 
+  public int[][] getstageCopy2(){
+    return stageCopy2;
+  }
   public void solve(int x, int y) {
     copyOverStage();
     //println("should be orig"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
@@ -56,9 +60,15 @@ public class Maze {
       stageCopy[x][y]==visited ||
       solved)
       return;
-    if (stageCopy[x][y]==exit)
+    if (stageCopy[x][y]==exit){
       solved=true;
+      stageCopy2=stageCopy;
+    }
     stageCopy[x][y]=me;
+     for (int[] a : stageCopy){
+    println(Arrays.toString(a));
+  } 
+  println();
     solveHelper(oldX+50, oldY );
     solveHelper(oldX-50, oldY );
     solveHelper(oldX, oldY+50 );

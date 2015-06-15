@@ -85,12 +85,18 @@ public void draw() {
   //println("score: "+score);
   updatePac();
   updateReddy();
-  
+  //println(stage[0].length);
+/* m.solve(125,275);
+ println("yo");
+  for (int[] a : m.stageCopy2){
+    println(Arrays.toString(a));
+  } 
+  println();*/
   reddy.drawMe();
   if (millis()<1000) m.solve(225,275);
   reddy.followPath();
   reddy.move();
-  //m.solve((int)reddy.getX(),(int)reddy.getY());
+  //m.solve((int)reddy.getY(),(int)reddy.getX());
   //m.solve(225,275);
   //printStage();
 }
