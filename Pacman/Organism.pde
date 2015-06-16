@@ -24,10 +24,11 @@ public class Organism {
     return size;
   }
 
-  public void setDirection(char c) {
+  public void setDirection(char direc) {
     println("inside setDirection");
-    println("direction->"+c);
-    direction = c;
+    println("direction->"+direc+".");
+    if ((int)direc==0) println("WHAT IS HAPPENING?");
+    direction = direc;
   }
 
   public char getDirection() {
