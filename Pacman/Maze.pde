@@ -1,16 +1,3 @@
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-/////////////////////////////////TESTING////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-
-
-
 public class Maze {
 
   private Frontier f;
@@ -24,9 +11,6 @@ public class Maze {
   public int[][] stageCopy2;
   public Node nextNode; //TODO: make this public, and make its get method
 
-  public int[][] getstageCopy2(){
-    return stageCopy2;
-  }
   public void solve(int x, int y) {
     copyOverStage();
     //println("should be orig"); for (int[] a:stageCopy){println(Arrays.toString(a));} println();
@@ -60,15 +44,15 @@ public class Maze {
       stageCopy[x][y]==visited ||
       solved)
       return;
-    if (stageCopy[x][y]==exit){
+    if (stageCopy[x][y]==exit) {
       solved=true;
       stageCopy2=stageCopy;
     }
     stageCopy[x][y]=me;
-     for (int[] a : stageCopy){
-    println(Arrays.toString(a));
-  } 
-  println();
+    //for (int[] a : stageCopy) {
+    //  println(Arrays.toString(a));
+    //} 
+    println();
     solveHelper(oldX+50, oldY );
     solveHelper(oldX-50, oldY );
     solveHelper(oldX, oldY+50 );
@@ -80,6 +64,12 @@ public class Maze {
   public int[][] getStageCopy() {
     return stageCopy;
   }
+
+  public int[][] getStageCopy2() {
+    println("inside getStageCopy2");
+    return stageCopy2;
+  }
+
 
   public void bfs (int x, int y) {
     copyOverStage();
@@ -102,18 +92,24 @@ public class Maze {
       addToFront(cx, cy+1, current);
       addToFront(cx, cy-1, current);
     }
-    println(f);
+    //println(f);
     //maybe this will store the next location that the ghost is supposed to move to 
     nextNode=current;
     //path recovery
     for (Node p = current.getPrev (); p!=null; p = p.getPrev()) {
       stageCopy[(int)p.getX()][(int)p.getY()]=visited; //is this supposed ot be visited?
     }
+    println("inside bfs");
+    println("STAGECOPY:");
     for (int[] a : stageCopy) {
       println(Arrays.toString(a));
     }
+    println("STAGE:");
+    for (int[] a : stage) {
+      println(Arrays.toString(a));
+    }
   }
-  
+
 
   public void addToFront(int tx, int ty, Node current) {
     Node tmp = null;

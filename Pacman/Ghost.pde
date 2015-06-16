@@ -19,7 +19,6 @@ public class Ghost extends Organism {
     killable=false;
     setDirection('l');
     m = new Maze();
-   
   }
 
   public void followPath() {
@@ -27,16 +26,15 @@ public class Ghost extends Organism {
     //println("x: "+this.getX());
     //println("y: "+this.getY());
     //println(millis());
-    //m.bfs((int)this.getSmallY(), (int)this.getSmallX());
-    m.solve((int)this.getSmallY(), (int)this.getSmallX());
+    m.bfs((int)this.getSmallY(), (int)this.getSmallX());
+    //m.solve((int)this.getSmallY(), (int)this.getSmallX());
     //println("x: "+this.getSmallX());
     //println("y: "+this.getSmallY());
-    stageCopy = m.getstageCopy2();
-    println("copy2");
-    for (int[] a : stageCopy){
-    println(Arrays.toString(a));
-  } 
-  println();
+    stageCopy = m.getStageCopy();
+    //for (int[] a : stageCopy) {
+    //  println(Arrays.toString(a));
+    //} 
+    println();
     //for (int[] a : stageCopy){
     //  println(Arrays.toString(a));
     //}
@@ -47,11 +45,11 @@ public class Ghost extends Organism {
 
   public void changeDirection() {
     if (this.getX()%50==25 && this.getY()%50==25) {
-      println("can i here");
-      for (int[] a : stage){
-    println(Arrays.toString(a));
-  } 
-  println();
+      //println("inside changeDirection");
+      //for (int[] a : stage) {
+      //  println(Arrays.toString(a));
+      //} 
+      //println();
       //    float x = m.nextNode.getX();
       //    float y = m.nextNode.getY();
       //    if (x<this.getX()) setDirection('l');
@@ -62,40 +60,30 @@ public class Ghost extends Organism {
       int yCor = getSmallY();
       if (isPath(xCor-1, yCor)) {
         setDirection('l');
-        stageCopy[xCor][yCor]=0;
-      }
-      else if (isPath(xCor+1, yCor)) {
+        //stageCopy[xCor][yCor]=0;
+      } else if (isPath(xCor+1, yCor)) {
         setDirection('r');
-        stageCopy[xCor][yCor]=0;
-      }
-      else if (isPath(xCor, yCor-1)) {
+        //stageCopy[xCor][yCor]=0;
+      } else if (isPath(xCor, yCor-1)) {
         setDirection('u');
-        stageCopy[xCor][yCor]=0;
-      }
-      else if (isPath(xCor, yCor+1)) {
+        //stageCopy[xCor][yCor]=0;
+      } else if (isPath(xCor, yCor+1)) {
         setDirection('d');
-        stageCopy[xCor][yCor]=0;
+        //stageCopy[xCor][yCor]=0;
       }
       println("inside changeDirection");
+      println("("+xCor+","+yCor+")  "+stageCopy[xCor][yCor]);
     }
   }
 
   public boolean isPath(int x, int y) {
     if (x>=0 && x<stageCopy.length && y>=0 && y<stageCopy[0].length) {
-      println("HEY IM HERE");
-     
+      println("inside isPath");
+      println("("+x+","+y+")  "+stageCopy[x][y]);
       if (stageCopy[x][y]==3)
         return true;
     }
     return false;
   }
-
-  /** Ideas
-   * make a ghosts array in Pacman class
-   * 4 ghosts
-   * starting pos?
-   * use A star search?
-   * release them at diff times?
-   **/
 }
 
