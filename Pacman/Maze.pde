@@ -9,7 +9,7 @@ public class Maze {
   private boolean solved = false;
   private int[][] stageCopy;
   public int[][] stageCopy2;
-  public Node nextNode; //TODO: make this public, and make its get method
+  private Node nextNode;
 
   public void solve(int x, int y) {
     copyOverStage();
@@ -96,7 +96,7 @@ public class Maze {
     //maybe this will store the next location that the ghost is supposed to move to 
     nextNode=current;
     //path recovery
-    for (Node p = current.getPrev (); p!=null; p = p.getPrev()) {
+    for (Node p = current.getPrev(); p!=null; p = p.getPrev()) {
       stageCopy[(int)p.getX()][(int)p.getY()]=visited; //is this supposed ot be visited?
     }
     println("inside bfs");
@@ -121,5 +121,11 @@ public class Maze {
       f.add(tmp);
     }
   }
+ 
+  public Node getNextNode(){
+    return nextNode;
+  }
+
 }
+
 

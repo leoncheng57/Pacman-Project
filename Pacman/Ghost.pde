@@ -22,40 +22,42 @@ public class Ghost extends Organism {
   }
 
   public void followPath() {
-    //println("inside followPath");
-    //println("x: "+this.getX());
-    //println("y: "+this.getY());
-    //println(millis());
-    m.bfs((int)this.getSmallY(), (int)this.getSmallX());
-    //m.solve((int)this.getSmallY(), (int)this.getSmallX());
-    //println("x: "+this.getSmallX());
-    //println("y: "+this.getSmallY());
-    stageCopy = m.getStageCopy();
-    //for (int[] a : stageCopy) {
-    //  println(Arrays.toString(a));
-    //} 
-    println();
-    //for (int[] a : stageCopy){
-    //  println(Arrays.toString(a));
-    //}
-    changeDirection();  
-    //println(this.getDirection());
+    if (this.getX()%50==25 && this.getY()%50==25) {
+      //println("inside followPath");
+      //println("x: "+this.getX());
+      //println("y: "+this.getY());
+      //println(millis());
+      m.bfs((int)this.getSmallY(), (int)this.getSmallX());
+      //m.solve((int)this.getSmallY(), (int)this.getSmallX());
+      //println("x: "+this.getSmallX());
+      //println("y: "+this.getSmallY());
+      stageCopy = m.getStageCopy();
+      //for (int[] a : stageCopy) {
+      //  println(Arrays.toString(a));
+      //} 
+      println();
+      //for (int[] a : stageCopy){
+      //  println(Arrays.toString(a));
+      //}
+      changeDirection();  
+      //println(this.getDirection());
+    }
   }
-
-
   public void changeDirection() {
+    println("Ghost is at ("+this.getSmallX()+","+this.getSmallY()+")");
     if (this.getX()%50==25 && this.getY()%50==25) {
       //println("inside changeDirection");
       //for (int[] a : stage) {
       //  println(Arrays.toString(a));
       //} 
       //println();
-      //    float x = m.nextNode.getX();
-      //    float y = m.nextNode.getY();
-      //    if (x<this.getX()) setDirection('l');
-      //    else if (x>this.getX()) setDirection('r');
-      //    else if (Y<this.getY()) setDirection('d');
-      //    else if (y<this.getY()) setDirection('u');
+      //      float x = m.getNextNode().getX();
+      //      float y = m.getNextNode().getY();
+      //      if (x<this.getX()) setDirection('l');
+      //      else if (x>this.getX()) setDirection('r');
+      //      else if (Y<this.getY()) setDirection('d');
+      //      else if (y<this.getY()) setDirection('u');
+      println("nextNode: "+m.getNextNode());
       int xCor = getSmallX();  //shouldnt this be switched x and y
       int yCor = getSmallY();
       if (isPath(xCor-1, yCor)) {
@@ -72,7 +74,7 @@ public class Ghost extends Organism {
         //stageCopy[xCor][yCor]=0;
       }
       println("inside changeDirection");
-      println("("+xCor+","+yCor+")  "+stageCopy[xCor][yCor]);
+      //println("("+xCor+","+yCor+")  "+stageCopy[(int)xCor][(int)yCor]);
     }
   }
 
