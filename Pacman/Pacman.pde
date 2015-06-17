@@ -10,32 +10,11 @@ MrPacman pac;
 Ghost reddy;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
-Maze m;
-char nextDirection;
 int score;
 
-
-public void setup() {
-  background(0);
-  size(700, 500);
-  //initializing stuff
-  pac = new MrPacman();
-  reddy= new Ghost();
-  blocks = new ArrayList<Block>();
-  tiles = new ArrayList<Tile>();
-
-  placeBlocks();
-  m = new Maze();
-  
-  //
-//  drawBlocks();
-//  drawTiles();
-//  pac.drawMe();
-//  m.solve(75,75);
-}  
-
-int[][] stage = { //the one with the J and L logos
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+/*
+int[][] stage = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
@@ -44,8 +23,33 @@ int[][] stage = { //the one with the J and L logos
     {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+*/
+int[][] stage = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 0, 5, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
+
+public void setup() {
+  background(0);
+  size(stage[0].length*50, stage.length*50);
+  //initializing stuff
+  pac = new MrPacman();
+  reddy= new Ghost();
+  blocks = new ArrayList<Block>();
+  tiles = new ArrayList<Tile>();
+
+  placeBlocks();
+}  
 
 public void placeBlocks() {
   int[][] blocksGrid = stage;
@@ -55,8 +59,7 @@ public void placeBlocks() {
       if (blocksGrid[c][r]==1)
         blocks.add(new Block(r,c));   
       else
-        tiles.add(new Tile(r,c));
-        
+        tiles.add(new Tile(r,c));        
     }
   }
 }
@@ -68,25 +71,19 @@ public void draw() {
   drawTiles();
   
   pac.drawMe();
-  changeDirection();
-  move();
-  earnPoints();
-  //println("score: "+score);
+  changeDirection(pac);
+  move(pac);
   updatePac();
-  updateReddy();
-  //println(stage[0].length);
-/* m.solve(125,275);
- println("yo");
-  for (int[] a : m.stageCopy2){
-    println(Arrays.toString(a));
-  } 
-  println();*/
+  
   reddy.drawMe();
-  //reddy.followPath();
-  reddy.move();
-  //m.solve((int)reddy.getY(),(int)reddy.getX());
-  //m.solve(225,275);
-  //printStage();
+  reddy.randomDirection();
+  changeDirection(reddy);
+  move(reddy);
+  updateReddy();
+  
+  earnPoints();
+  println("score: "+score);
+  printStage();
 }
 
 
@@ -109,32 +106,32 @@ public void drawTiles(){
   }
 }
 
-public void move() {
-  if (canMove()) pac.move();
+public void move(Organism org) {
+  if (canMove(org)) org.move();
 }
 
-public boolean canMove() {
-  float size = pac.getSize();
+public boolean canMove(Organism org) {
+  float size = org.getSize();
   for (Block b : blocks) {
-    if (pac.getDirection()=='u' && b.isColliding(pac.getX(), pac.getY()-size)) return false; 
-    else if (pac.getDirection()=='d' && b.isColliding(pac.getX(), pac.getY()+size)) return false; 
-    else if (pac.getDirection()=='r' && b.isColliding(pac.getX()+size, pac.getY())) return false; 
-    else if (pac.getDirection()=='l' && b.isColliding(pac.getX()-size, pac.getY())) return false;
+    if (org.getDirection()=='u' && b.isColliding(org.getX(), org.getY()-size)) return false; 
+    else if (org.getDirection()=='d' && b.isColliding(org.getX(), org.getY()+size)) return false; 
+    else if (org.getDirection()=='r' && b.isColliding(org.getX()+size, org.getY())) return false; 
+    else if (org.getDirection()=='l' && b.isColliding(org.getX()-size, org.getY())) return false;
   }
   return true;
 }
 
 //will only change direction when allowed (no more blocks in the way, in center of path)
-public void changeDirection(){
-  if (pac.getX()%50==25 && pac.getY()%50==25){
-    float size = pac.getSize();
+public void changeDirection(Organism org){
+  if (org.getX()%50==25 && org.getY()%50==25){
+    float size = org.getSize();
     for (Block b : blocks) {
-      if (nextDirection=='u' && b.isColliding(pac.getX(), pac.getY()-size)) return; 
-      else if (nextDirection=='d' && b.isColliding(pac.getX(), pac.getY()+size)) return; 
-      else if (nextDirection=='r' && b.isColliding(pac.getX()+size, pac.getY())) return; 
-      else if (nextDirection=='l' && b.isColliding(pac.getX()-size, pac.getY())) return;
+      if (org.getNextDirection()=='u' && b.isColliding(org.getX(), org.getY()-size)) return; 
+      else if (org.getNextDirection()=='d' && b.isColliding(org.getX(), org.getY()+size)) return; 
+      else if (org.getNextDirection()=='r' && b.isColliding(org.getX()+size, org.getY())) return; 
+      else if (org.getNextDirection()=='l' && b.isColliding(org.getX()-size, org.getY())) return;
     }
-    pac.setDirection(nextDirection);
+    org.setDirection(org.getNextDirection());
   }
 }
 
@@ -185,14 +182,17 @@ public void updateReddy() {
 public void keyPressed() {
   if (key == CODED) {
     if (keyCode == UP) {
-      nextDirection='u';
+      pac.setNextDirection('u');
     } else if (keyCode == DOWN) {
-      nextDirection='d';
+      pac.setNextDirection('d');
     } else if (keyCode == RIGHT) {
-      nextDirection='r';
+      pac.setNextDirection('r');
     } else if (keyCode == LEFT) {
-      nextDirection='l';
+      pac.setNextDirection('l');
     }
   }
 }
+
+
+
 

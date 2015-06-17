@@ -4,6 +4,7 @@ public class Organism {
   float yCor;
   color col;
   char direction;
+  char nextDirection;
   float speed;
   float size;
 
@@ -30,6 +31,14 @@ public class Organism {
 
   public char getDirection() {
     return direction;
+  }
+
+  public void setNextDirection(char direc) {
+    nextDirection = direc;
+  }
+
+  public char getNextDirection() {
+    return nextDirection;
   }
 
   public float getX() {
