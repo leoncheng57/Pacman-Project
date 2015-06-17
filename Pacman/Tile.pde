@@ -1,10 +1,15 @@
 public class Tile extends Node {
   boolean havePoints;
-  public Tile(float x, float y) { //x and y are like coords for blocksGrid
+  boolean power;
+  public Tile(float x, float y, boolean magic) { //x and y are like coords for blocksGrid
     xCor = x*50;
     yCor = y*50;
     col = #D1C8C8;
     havePoints=true;
+    power=false;
+    if (magic){
+      power=true;
+    }
   }
 
   public void noPoints() {
@@ -13,10 +18,15 @@ public class Tile extends Node {
   }
   public void drawMe() {
     super.drawMe();
-    if (havePoints) {
+    if (power && havePoints){
+      fill(#A9FAAE);
+      ellipse(xCor+size/2, yCor+size/2, 20, 20);
+    }
+    else if(havePoints){
       fill(#FCF569);
       ellipse(xCor+size/2, yCor+size/2, 10, 10);
     }
+    
   }
 }
 
