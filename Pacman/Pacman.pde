@@ -82,8 +82,7 @@ public void draw() {
   } 
   println();*/
   reddy.drawMe();
-  if (millis()<1000) m.solve(225,275);
-  reddy.followPath();
+  //reddy.followPath();
   reddy.move();
   //m.solve((int)reddy.getY(),(int)reddy.getX());
   //m.solve(225,275);

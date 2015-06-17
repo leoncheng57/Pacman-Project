@@ -25,15 +25,10 @@ public class Organism {
   }
 
   public void setDirection(char direc) {
-    println("inside setDirection");
-    println("direction->"+direc+".");
-    if ((int)direc==0) println("WHAT IS HAPPENING?");
-    println(this.getDirection());
     direction = direc;
   }
 
   public char getDirection() {
-    //println("inside getDirection");
     return direction;
   }
 
