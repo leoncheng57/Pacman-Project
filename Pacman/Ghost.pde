@@ -2,7 +2,7 @@ public class Ghost extends Organism {
 
   boolean scared;
   private int[][] stageCopy;
-
+  
   public Ghost() {     
     for (int c= 0; c<stage.length; c++) {
       for (int r=0; r<stage[0].length; r++) {
@@ -15,7 +15,7 @@ public class Ghost extends Organism {
     size = 25;
     col = #b22222;
     speed = 5;  
-    killable=false;
+    scared=false;
     setDirection('l');
   }
   

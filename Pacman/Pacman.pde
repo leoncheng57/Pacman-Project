@@ -7,7 +7,10 @@ import java.util.*;
 import java.io.*;
 
 MrPacman pac;
-Ghost reddy;
+Reddy reddy;
+BlueG blue;
+OrangeCream orange;
+Pinky pink;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
@@ -31,8 +34,8 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
     {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,}, 
     {1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 0, 0, 5, 0, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 6, 5, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 7, 8, 0, 1, 0, 1, 0, 1,}, 
     {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,}, 
     {1, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
@@ -44,7 +47,10 @@ public void setup() {
   size(stage[0].length*50, stage.length*50);
   //initializing stuff
   pac = new MrPacman();
-  reddy= new Ghost();
+  reddy= new Reddy();
+  blue = new BlueG();
+  orange = new OrangeCream();
+  pink = new Pinky();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
 
@@ -79,7 +85,25 @@ public void draw() {
   reddy.randomDirection();
   changeDirection(reddy);
   move(reddy);
-  updateReddy();
+  updateGhost(reddy);
+ 
+  blue.drawMe();
+  blue.randomDirection();
+  changeDirection(blue);
+  move(blue);
+  updateGhost(blue);
+  
+  orange.drawMe();
+  orange.randomDirection();
+  changeDirection(orange);
+  move(orange);
+  updateGhost(orange);
+  
+  pink.drawMe();
+  pink.randomDirection();
+  changeDirection(pink);
+  move(pink);
+  updateGhost(pink);
   
   earnPoints();
   println("score: "+score);
@@ -162,16 +186,17 @@ public void updatePac() {
   }
 }
 
-public void updateReddy() {
-  if (reddy.getX()%50==25 && reddy.getY()%50==25) {
+
+public void updateGhost(Ghost g) {
+  if (g.getX()%50==25 && g.getY()%50==25) {
     for (int c= 0; c<stage.length; c++) {
       for (int r=0; r<stage[0].length; r++) {
         //println("x: "+pac.getX()+"y: "+pac.getY());
-        if (stage[c][r]==5) {
+        if (stage[c][r]==g.getID()) {
           stage[c][r]=0;
           //println("r: "+r+"c: "+c);
-        } if (r==(reddy.getX()-25)/50 && c==(reddy.getY()-25)/50) {
-          stage[c][r]=5;
+        } if (r==(g.getX()-25)/50 && c==(g.getY()-25)/50) {
+          stage[c][r]=g.getID();
         }
       }
     }

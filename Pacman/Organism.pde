@@ -7,7 +7,7 @@ public class Organism {
   char nextDirection;
   float speed;
   float size;
-
+  private int ID;
   private Organism() {
   }  //should this be private or public?
 
@@ -48,7 +48,12 @@ public class Organism {
   public float getY() {
     return yCor;
   }
-
+  public int getID(){
+    return ID;
+  }
+  public void setID(int x){
+    ID=x;
+  }
 
   public void move() {
     if (direction == 'u') yCor-= speed; //change everything in this class to gets and sets? ex. getDirection()=='u'
