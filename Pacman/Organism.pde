@@ -7,7 +7,8 @@ public class Organism {
   char nextDirection;
   float speed;
   float size;
-  private int ID;
+  int ID;
+  boolean alive;
   private Organism() {
   }  //should this be private or public?
 
@@ -53,6 +54,12 @@ public class Organism {
   }
   public void setID(int x){
     ID=x;
+  }
+  public boolean isAlive(){
+    return alive;
+  }
+  public void setAlive(boolean e){
+    alive=e;
   }
 
   public void move() {

@@ -14,5 +14,6 @@ public class OrangeCream extends Ghost{
     scared=false;
     setDirection('l');
     setID(7);
+    setAlive(true);
    }
 }

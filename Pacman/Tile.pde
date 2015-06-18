@@ -11,7 +11,20 @@ public class Tile extends Node {
       power=true;
     }
   }
-
+  public void eatPower(){
+    havePoints=false;
+    power=false;
+    score+=10;
+     int timeB4=millis();
+    
+      
+   
+    reddy.killable();
+    blue.killable();
+    orange.killable();
+    pink.killable();
+    
+  }
   public void noPoints() {
     havePoints=false;
     score++;

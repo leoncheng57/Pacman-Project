@@ -14,7 +14,7 @@ Pinky pink;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
-
+int timebefore=0;
 /*
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
@@ -83,33 +83,57 @@ public void draw() {
   move(pac);
   updatePac();
   
+  if (reddy.isAlive() && !reddy.isScared()){
   reddy.drawMe();
   reddy.randomDirection();
   changeDirection(reddy);
   move(reddy);
   updateGhost(reddy);
- 
+  }
+  else if (reddy.isScared()){
+    reddy.badtimes();
+  }
+  
+  if (blue.isAlive() && !blue.isScared()){
   blue.drawMe();
   blue.randomDirection();
   changeDirection(blue);
   move(blue);
   updateGhost(blue);
+  }
+  else if (blue.isScared()){
+    blue.badtimes();
+  }
   
+  if(orange.isAlive() && !orange.isScared()){
   orange.drawMe();
   orange.randomDirection();
   changeDirection(orange);
   move(orange);
   updateGhost(orange);
+  }
+  else if (orange.isScared()){
+    orange.badtimes();
+  }
   
+  if (pink.isAlive() && !pink.isScared()){
   pink.drawMe();
   pink.randomDirection();
   changeDirection(pink);
   move(pink);
   updateGhost(pink);
+  }
+  else if (pink.isScared()){
+    pink.badtimes();
+  }
   
   earnPoints();
   println("score: "+score);
   printStage();
+  textSize(32);
+  fill(#FCFC30);
+  text("Score:"+score,25,480);
+  
 }
 
 
@@ -164,7 +188,10 @@ public void changeDirection(Organism org){
 public void earnPoints(){
   for (Tile t:tiles){
     if (t.getX()+t.getSize()/2==pac.getX() && t.getY()+t.getSize()/2==pac.getY()){
-      if (t.havePoints){
+      if (t.power && t.havePoints){
+        t.eatPower();
+      }
+      else if (t.havePoints){
       t.noPoints();
       }
     }

@@ -14,5 +14,6 @@ public class Pinky extends Ghost{
     scared=false;
     setDirection('l');
     setID(8);
+    setAlive(true);
   }
 }

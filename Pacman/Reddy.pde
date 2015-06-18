@@ -14,5 +14,6 @@ public class Reddy extends Ghost{
     scared=false;
     setDirection('l');
     setID(5);
+    setAlive(true);
   } 
 }

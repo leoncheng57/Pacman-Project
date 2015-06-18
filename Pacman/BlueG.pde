@@ -14,5 +14,6 @@ public class BlueG extends Ghost{
     scared=false;
     setDirection('l');
     setID(6);
+    setAlive(true);
   }
 }
