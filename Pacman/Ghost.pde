@@ -34,18 +34,19 @@ public class Ghost extends Organism {
     if (timebefore==0){
        timebefore=millis();
     }
-      fill(#1C5CFA);
-      ellipse(this.getX(), this.getY(), this.getSize(), this.getSize());
+      color og = this.getColor();
+      println(og);
+      this.setColor(#1C5CFA);
+      normalAction(this);
+      
       println(millis()-timebefore);
      
-      this.randomDirection();
-      changeDirection(this);
-      move();
-      updateGhost(this);
       if (millis()-timebefore >1000){
+       this.setColor(#FFFFFF);
+       this.setScared(false);
        
-       this.setScared(false); 
        timebefore=0;
+       
       }
   }
   public void setScared(boolean e){

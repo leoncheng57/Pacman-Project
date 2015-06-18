@@ -76,5 +76,11 @@ public class Organism {
   public int getSmallY() {
     return (int)((this.getY()-25)/50);
   }
+  public void setColor(color e){
+   col=e; 
+  }
+  public color getColor(){
+    return col;
+  }
 }
 

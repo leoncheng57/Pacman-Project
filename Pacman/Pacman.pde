@@ -135,7 +135,13 @@ public void draw() {
   text("Score:"+score,25,480);
   
 }
-
+public void normalAction(Ghost g){
+   g.drawMe();
+  g.randomDirection();
+  changeDirection(g);
+  move(g);
+  updateGhost(g);
+}
 
 public void printStage(){
   for (int[] a : stage){
