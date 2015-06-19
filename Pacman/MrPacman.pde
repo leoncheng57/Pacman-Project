@@ -14,6 +14,7 @@ public class MrPacman extends Organism {
     col = #FFE834;
     speed = 5;
     setID(2);
+    setAlive(true);
   }
 
 }

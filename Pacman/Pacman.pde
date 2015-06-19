@@ -27,6 +27,8 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };*/
+
+
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
@@ -39,12 +41,32 @@ int[][] stage = {
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+
+int[][] stagecopy = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 6, 5, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 7, 8, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1,}, 
+    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
+
 /*
 int[][] stage = {
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
   {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};*/
+};
+int[][] stagecopy = {
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+  {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
+*/
 /**
   * 0 = tile
   * 1 = block
@@ -100,20 +122,20 @@ public void draw() {
   updatePac();
   
   for (Ghost g : ghosts){
-    if (g.isAlive()){
     g.drawMe();
-    }
-    else
+    if (!g.isReady())
       g.respawn();
     if (g.isReady()){
-    g.randomDirection();
-    changeDirection(g);
-    move(g);
-    updateGhost(g);
+      g.randomDirection();
+      changeDirection(g);
+      move(g);
+      updateGhost(g);
     }
     if (g.isScared()){
       g.badtimes(); 
     }  
+    else
+      g.killPac();
   }
   
     
@@ -122,6 +144,7 @@ public void draw() {
   //printStage();
   textSize(32);
   fill(#FCFC30);
+  textAlign(CORNER);
   text("Score:"+score,25,480);
   
   endGame();
@@ -233,9 +256,13 @@ public void updateGhost(Ghost g) {
 public boolean hasWon(){
   for (Tile t : tiles){
     if (t.hasPower() || t.hasPoints()){
-      return false; 
+      return false;
     }
   } 
+  for(Ghost g: ghosts){
+   g.setReady(false); 
+  }
+
   return true;
 }
 
@@ -247,19 +274,31 @@ public void endGame(){
     textSize(60);
     text("You Win!", width/2, height/2);
     textSize(30);
-    text("Click to play again!", width/2, height/2+30); 
-    //blocks = null;
-    //ghosts = null;
-    //tiles = null;
-    //score = 0;
-    //pac = null;
+    text("Final Score: "+score,width/2,height/2+39);
+    text("Click to play again!", width/2, height/2+60); 
     gameWon = true;
+  }
+  if (!pac.isAlive()){
+     background(0);
+    textAlign(CENTER);
+    textSize(60);
+    text("You Lost!", width/2, height/2);
+    textSize(30);
+    text("Final Score: "+score,width/2,height/2+39);
+    text("Click to play again!", width/2, height/2+60); 
   }
 }
 
 //not working right, things do not totally reset, powerups do not return, ghosts do not reset
 public void mouseClicked(){
-  if (gameWon){
+  if (gameWon || !pac.isAlive()){
+    gameWon=false;
+    for (int c= 0; c<stagecopy.length;c++){
+      for (int r=0; r<stagecopy[0].length;r++){
+        stage[c][r]=stagecopy[c][r];
+      }
+    }
+    score=0;
     setup(); 
     loop();
   } 

@@ -10,6 +10,7 @@ public class Organism {
   int ID;
   boolean alive;
   boolean ready;
+  
   private Organism() {
   }  //should this be private or public?
 

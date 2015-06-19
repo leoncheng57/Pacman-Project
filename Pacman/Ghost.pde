@@ -5,9 +5,11 @@ public class Ghost extends Organism {
   private int[][] stageCopy;
   int timebefore;
   int spawnTime;
-  int scaredDuration = 20000;
+  int scaredDuration;
   float spawnPointX;
   float spawnPointY;
+  boolean edible;
+
   public Ghost() {     
     for (int c= 0; c<stage.length; c++) {
       for (int r=0; r<stage[0].length; r++) {
@@ -24,6 +26,8 @@ public class Ghost extends Organism {
     setDirection('l');
     timebefore=0;
     spawnTime=0;
+    scaredDuration = 8000;
+    edible=false;
   }
 
   public void randomDirection() {
@@ -39,16 +43,19 @@ public class Ghost extends Organism {
     if (timebefore==0) {
       timebefore=millis();
       oldColor = col;
+      this.setColor(#1C5CFA); //blue, color of scared ghosts
+      this.setEdible(true);
     }
-    this.setColor(#1C5CFA); //blue, color of scared ghosts
-    if (abs(this.getX()-pac.getX())==0 && abs(this.getY()-pac.getY())==0){
+    if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25 && this.isEdible()) {
       println("im here");
       this.setAlive(false);
       this.setReady(false);
-      
+      score+=50;
+      this.setEdible(false);
+      return;
       //println(this.isAlive());
     }
-    
+
     //println(millis()-timebefore);
     if (millis()-timebefore > scaredDuration) {
       this.setColor(oldColor);
@@ -61,25 +68,42 @@ public class Ghost extends Organism {
     scared=e;
   }
 
+
   public boolean isScared() {
     return scared;
   }
-  public void respawn(){
+
+  public void respawn() {
+    this.setColor(oldColor);
     this.setX(spawnPointX);
     this.setY(spawnPointY);
-    this.setColor(oldColor);
-    this.drawMe();
-    if (spawnTime==0){
-      spawnTime=millis();
+
+    if (spawnTime==0) {
+      spawnTime=millis(); //WHat is spawntiem? to keep them in the base for like 5 secs before they go back out and start moving.  bascially ready variable allows themt o move alive is for drawing  ill brb
+      this.setColor(oldColor);
+      this.setAlive(true);
     }
-    this.setColor(oldColor);
-    this.setAlive(true);
-    if (millis()-spawnTime > 2000){
-     println("this happens");
-     this.setReady(true); 
+
+    println(millis()-spawnTime);
+    if (millis()-spawnTime > 4000) {
+      println("this happens");
+      this.setReady(true); 
+      spawnTime=0;
     }
-      
-    
+  }
+
+  public void killPac(){
+    if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25){
+      pac.setAlive(false);
+    }
+  }
+  
+  public void setEdible(boolean e){
+   edible=e; 
+  }
+  
+  public boolean isEdible(){
+    return edible;
   }
 }
 
