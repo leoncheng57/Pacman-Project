@@ -1,41 +1,47 @@
 public class Tile extends Node {
 
-  boolean havePoints;
-  boolean power;
+  private boolean points;
+  private boolean power;
 
   public Tile(float x, float y, boolean magic) { //x and y are like coords for blocksGrid
     xCor = x*50;
     yCor = y*50;
     col = #D1C8C8;
-    havePoints=true;
+    points=true;
     power=false;
     if (magic) {
       power=true;
     }
   }
+  
+  public boolean hasPower(){
+    return power;
+  }
+  
+  public boolean hasPoints(){
+    return points;
+  }
 
   public void eatPower() {
-    havePoints=false;
+    points=false;
     power=false;
     score+=10;
-    int timeB4=millis();
-
     for (Ghost g : ghosts){
-      g.killable();
+      g.setScared(true);
     }
   }
 
-  public void noPoints() {
-    havePoints=false;
+  public void eatPoints() {
+    points=false;
     score++;
   }
 
   public void drawMe() {
     super.drawMe();
-    if (power && havePoints) {
+    if (power && points) {
       fill(#A9FAAE);
       ellipse(xCor+size/2, yCor+size/2, 20, 20);
-    } else if (havePoints) {
+    } else if (points) {
       fill(#FCF569);
       ellipse(xCor+size/2, yCor+size/2, 10, 10);
     }

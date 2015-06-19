@@ -38,6 +38,12 @@ int[][] stage = {
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+/**
+  * 1 = block
+  * 2 = pacman
+  * 5/6/7/8 = ghosts
+  * 9 = powerup
+  **/
 
 public void setup() {
   background(0);
@@ -85,26 +91,26 @@ public void draw() {
   updatePac();
   
   for (Ghost g : ghosts){
-    if (g.isAlive() && !g.isScared()){
-      g.drawMe();
-      g.randomDirection();
-      changeDirection(g);
-      move(g);
-      updateGhost(g);
-    }
-    else if (g.isScared()){
-      g.badtimes();
-    }
+    g.drawMe();
+    g.randomDirection();
+    changeDirection(g);
+    move(g);
+    updateGhost(g);
+    if (g.isScared()){
+      g.badtimes(); 
+    }  
   }
+  
     
   earnPoints();
   println("score: "+score);
-  printStage();
+  //printStage();
   textSize(32);
   fill(#FCFC30);
   text("Score:"+score,25,480);
   
 }
+
 public void normalAction(Ghost g){
   g.drawMe();
   g.randomDirection();
@@ -164,11 +170,11 @@ public void changeDirection(Organism org){
 public void earnPoints(){
   for (Tile t:tiles){
     if (t.getX()+t.getSize()/2==pac.getX() && t.getY()+t.getSize()/2==pac.getY()){
-      if (t.power && t.havePoints){
+      if (t.hasPower() && t.hasPoints()){
         t.eatPower();
       }
-      else if (t.havePoints){
-      t.noPoints();
+      else if (t.hasPoints()){
+        t.eatPoints();
       }
     }
   } 
