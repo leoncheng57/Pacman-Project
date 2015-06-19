@@ -6,7 +6,7 @@ public class Block extends Node{
     col = #0774B9;
   }
 
-  
+  //checks if pacman about to hit block
   public boolean isColliding(float x, float y) {
     return (x>=this.xCor &&
       x<=this.xCor+size &&

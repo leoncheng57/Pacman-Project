@@ -38,7 +38,8 @@ public class Ghost extends Organism {
     else if (num == 2) setNextDirection('l');
     else if (num == 3) setNextDirection('r');
   }  
-
+  
+ //actions that happen to ghost when Pacman gets a powerup.
   public void badtimes() {
     if (timebefore==0) {
       timebefore=millis();

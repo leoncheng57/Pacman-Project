@@ -1,3 +1,4 @@
+//not used, experimental 
 public class Maze {
 
   private Frontier f;

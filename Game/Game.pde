@@ -13,7 +13,13 @@ ArrayList<Tile> tiles;
 int score;
 boolean gameWon;
 //PImage wonImage;
-
+/**
+  * 0 = tile
+  * 1 = block
+  * 2 = pacman
+  * 5/6/7/8 = ghosts
+  * 9 = powerup
+  **/
 /*
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
@@ -27,6 +33,7 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };*/
+
 
 
 int[][] stage = {
@@ -67,13 +74,6 @@ int[][] stagecopy = {
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 */
-/**
-  * 0 = tile
-  * 1 = block
-  * 2 = pacman
-  * 5/6/7/8 = ghosts
-  * 9 = powerup
-  **/
 
 public void setup() {
   //wonImage = loadImage("You Win.png");
@@ -83,7 +83,7 @@ public void setup() {
   pac = new MrPacman();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
-  placeBlocks();
+  placeBlocksTiles();
   ghosts = new ArrayList<Ghost>();
   Ghost reddy= new Reddy();
   Ghost blue = new BlueG();
@@ -94,10 +94,10 @@ public void setup() {
   ghosts.add(orange);
   ghosts.add(pink);
 }  
-
-public void placeBlocks() {
+//looks through the arraylist and if there is a corresponding number, adds to another arraylist of those objects
+public void placeBlocksTiles() {
   int[][] blocksGrid = stage;
-  //Note: blocksGrid is a column-major array?
+  //Note: blocksGrid is a column-major array?, 
   for (int c= 0; c<blocksGrid.length;c++){
     for (int r=0; r<blocksGrid[0].length;r++){
       if (blocksGrid[c][r]==1)
@@ -112,8 +112,8 @@ public void placeBlocks() {
 
 
 public void draw() {
-  background(0); //TODO: make a var for background color and set it to that, or use an image
-  drawBlocks();
+  background(0); 
+  drawBlocks();  
   drawTiles();
   
   pac.drawMe();
