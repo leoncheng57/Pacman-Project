@@ -1,5 +1,4 @@
 # Pacman-Project
-**PACMAN**
 <br>*By Javis Wu and Leon Cheng*
 
 Instructions
@@ -10,44 +9,18 @@ Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the
 * lose lives if killed by ghost
 * eat scared ghosts when you have powerup
 
-NOTES
+NOTES FOR Z
 =====
-To include in README
-- name of the proejct
-- who worked on it
-- instructions to run
-- anything else I should know.
+We had trouble with trying to use a recursive solve for the ghost ai movement. Did not work out in the end and took up alot of time. Then we tried BFS but that also did not work. We left the code in if you want to take a look at it. In the end, we resorted to random movement.
 
 TODO
 ----
-* ai movement
-* a way to die
-* a way to win
-* multiple levels? increasing difficulty?
 * deal with comments inside code
 * Make sure to contact Z when we're finished and thank him for the extension 
 
 Questions
 ---------
-* how to read in a file like maze.dat into Processing?
 * need to make vars private?
-* readjust the devlog dates so that they look better?
-
-Future Ideas
-------------
-* Fix Pacman's movement so that he will only changeDirection once he reaches the middle of the path (so that Pacman cannot move sideways inside one path)
-* get images (background, pacman, ghosts, etc)
-* different levels
-* different stages
-* differetn avatars for pacman, monsters
-* different stage background color/design
-* cheat/sandbox mode
-* upgrades
-* attack
-* shooting, shield, gain lives, etc
-* items (cherries, other fruits, etc)
-* diff speeds for MrPacman
-
 
 DEVLOG
 ------
@@ -69,3 +42,9 @@ DEVLOG
 * 6/10 - completed updatePac
 * 6/11 - still working on solve
 * 6/12 - made some progress on solve
+* 6/13 - wrote updateReddy, imrpoved stage copy, made progress on ghost movement
+* 6/14 - improved printing data, started to use bfs because stuck with solve
+* 6/16 - gave up on solve and bfs, couldn't get, now using random movement
+* 6/17 - added 4 ghosts, worked on superpower, scared, and ghost dying
+* 6/18 - added endGame and mouseclicked
+* 6/19 - worked on encounter, scrapped encounter, got ghosts to kill pac, got pac to kill ghosts, ghosts able to respawn, able to restart game, game endscreen made
