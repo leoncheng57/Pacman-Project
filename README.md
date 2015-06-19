@@ -3,11 +3,15 @@
 
 Instructions
 ------------
+Instructions:
 Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food without getting killed by ghosts. But if you eat a powerup, you can kill the scared ghosts for more points!. Have fun!
+Simple Instructions:
 * move with arrow keys
 * win by eating all food
 * lose lives if killed by ghost
 * eat scared ghosts when you have powerup
+Cheat:
+* press z to start force ghosts into scared mode
 
 NOTES FOR Z
 =====
@@ -15,12 +19,7 @@ We had trouble with trying to use a recursive solve for the ghost ai movement. D
 
 TODO
 ----
-* deal with comments inside code
 * Make sure to contact Z when we're finished and thank him for the extension 
-
-Questions
----------
-* need to make vars private?
 
 DEVLOG
 ------
@@ -47,4 +46,4 @@ DEVLOG
 * 6/16 - gave up on solve and bfs, couldn't get, now using random movement
 * 6/17 - added 4 ghosts, worked on superpower, scared, and ghost dying
 * 6/18 - added endGame and mouseclicked
-* 6/19 - worked on encounter, scrapped encounter, got ghosts to kill pac, got pac to kill ghosts, ghosts able to respawn, able to restart game, game endscreen made
+* 6/19 - got ghosts to kill pac, got pac to kill ghosts, ghosts able to respawn, able to restart game, game endscreen made, used multiple stages

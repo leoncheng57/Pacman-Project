@@ -12,8 +12,8 @@ public class Organism {
   boolean ready;
   
   private Organism() {
-  }  //should this be private or public?
-
+  } 
+  
   public Organism(float x, float y) {
     xCor = x;
     yCor = y;
@@ -77,7 +77,7 @@ public class Organism {
   }
 
   public void move() {
-    if (direction == 'u') yCor-= speed; //change everything in this class to gets and sets? ex. getDirection()=='u'
+    if (direction == 'u') yCor-= speed; 
     if (direction == 'd') yCor+= speed;
     if (direction == 'l') xCor-= speed;
     if (direction == 'r') xCor+= speed;

@@ -272,7 +272,6 @@ public void endGame(){
   }
 }
 
-//not working right, things do not totally reset, powerups do not return, ghosts do not reset
 public void mouseClicked(){
   if (gameWon || !pac.isAlive()){
     gameWon=false;
@@ -307,6 +306,8 @@ public void keyPressed() {
       g.setScared(true); 
     }
   }
+  
+  //stages
   if (key=='2'){
     stage = copyOverStage(stage2);
     stagecopy = copyOverStage(stage2);

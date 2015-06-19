@@ -2,7 +2,7 @@ public class Node {
 
   float xCor;
   float yCor;
-  public static final float size = 50; //correct types for this var?
+  public static final float size = 50; 
   color col;
   Node prev;
   Node next;
