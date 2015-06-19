@@ -9,6 +9,7 @@ public class Organism {
   float size;
   int ID;
   boolean alive;
+
   private Organism() {
   }  //should this be private or public?
 

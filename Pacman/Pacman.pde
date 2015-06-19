@@ -7,10 +7,7 @@ import java.util.*;
 import java.io.*;
 
 MrPacman pac;
-Reddy reddy;
-BlueG blue;
-OrangeCream orange;
-Pinky pink;
+ArrayList<Ghost> ghosts;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
@@ -47,13 +44,17 @@ public void setup() {
   size(stage[0].length*50, stage.length*50);
   //initializing stuff
   pac = new MrPacman();
-  reddy= new Reddy();
-  blue = new BlueG();
-  orange = new OrangeCream();
-  pink = new Pinky();
+  ghosts = new ArrayList<Ghost>();
+  Ghost reddy= new Reddy();
+  Ghost blue = new BlueG();
+  Ghost orange = new OrangeCream();
+  Ghost pink = new Pinky();
+  ghosts.add(reddy);
+  ghosts.add(blue);
+  ghosts.add(orange);
+  ghosts.add(pink);
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
-
   placeBlocks();
 }  
 
@@ -83,50 +84,19 @@ public void draw() {
   move(pac);
   updatePac();
   
-  if (reddy.isAlive() && !reddy.isScared()){
-  reddy.drawMe();
-  reddy.randomDirection();
-  changeDirection(reddy);
-  move(reddy);
-  updateGhost(reddy);
+  for (Ghost g : ghosts){
+    if (g.isAlive() && !g.isScared()){
+      g.drawMe();
+      g.randomDirection();
+      changeDirection(g);
+      move(g);
+      updateGhost(g);
+    }
+    else if (g.isScared()){
+      g.badtimes();
+    }
   }
-  else if (reddy.isScared()){
-    reddy.badtimes();
-  }
-  
-  if (blue.isAlive() && !blue.isScared()){
-  blue.drawMe();
-  blue.randomDirection();
-  changeDirection(blue);
-  move(blue);
-  updateGhost(blue);
-  }
-  else if (blue.isScared()){
-    blue.badtimes();
-  }
-  
-  if(orange.isAlive() && !orange.isScared()){
-  orange.drawMe();
-  orange.randomDirection();
-  changeDirection(orange);
-  move(orange);
-  updateGhost(orange);
-  }
-  else if (orange.isScared()){
-    orange.badtimes();
-  }
-  
-  if (pink.isAlive() && !pink.isScared()){
-  pink.drawMe();
-  pink.randomDirection();
-  changeDirection(pink);
-  move(pink);
-  updateGhost(pink);
-  }
-  else if (pink.isScared()){
-    pink.badtimes();
-  }
-  
+    
   earnPoints();
   println("score: "+score);
   printStage();
@@ -136,7 +106,7 @@ public void draw() {
   
 }
 public void normalAction(Ghost g){
-   g.drawMe();
+  g.drawMe();
   g.randomDirection();
   changeDirection(g);
   move(g);

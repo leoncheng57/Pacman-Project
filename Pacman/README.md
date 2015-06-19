@@ -12,13 +12,10 @@ To include in README
 TODO
 ----
 * ai movement
-* display points
-* scared ghosts
-* power food
-* more ghosts
 * a way to die
 * a way to win
 * multiple levels? increasing difficulty?
+* deal with comments inside code
 
 Questions
 ---------
