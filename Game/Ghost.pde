@@ -5,6 +5,7 @@ public class Ghost extends Organism {
   private int[][] stageCopy;
   int timebefore;
   int spawnTime;
+  int waitDuration;
   int scaredDuration;
   float spawnPointX;
   float spawnPointY;
@@ -28,6 +29,7 @@ public class Ghost extends Organism {
     spawnTime=0;
     scaredDuration = 8000;
     edible=false;
+    waitDuration=4000;
   }
 
   public void randomDirection() {
@@ -47,8 +49,8 @@ public class Ghost extends Organism {
       this.setColor(#1C5CFA); //blue, color of scared ghosts
       this.setEdible(true);
     }
-    if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25 && this.isEdible()) {
-      println("im eaten");
+    if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25 && this.isEdible()) { //ghost is eaten
+      //println("im eaten");
       this.setAlive(false);
       this.setReady(false);
       score+=50;
@@ -77,12 +79,12 @@ public class Ghost extends Organism {
     this.setX(spawnPointX);
     this.setY(spawnPointY);
     if (spawnTime==0) {
-      spawnTime=millis(); //WHat is spawntiem? to keep them in the base for like 5 secs before they go back out and start moving.  bascially ready variable allows themt o move alive is for drawing  ill brb
+      spawnTime=millis();
       this.setColor(oldColor);
       this.setAlive(true);
     }
     //println(millis()-spawnTime);
-    if (millis()-spawnTime > 4000) {
+    if (millis()-spawnTime > waitDuration) {
       //println("this happens");
       this.setReady(true); 
       spawnTime=0;

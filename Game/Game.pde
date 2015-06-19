@@ -7,6 +7,8 @@ ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
 boolean gameWon;
+int[][] stage;
+int[][] stagecopy;
 //PImage imgEnd;
 
 /**
@@ -16,7 +18,7 @@ boolean gameWon;
   * 5/6/7/8 = ghosts
   * 9 = powerup
   **/
-int[][] stage = {
+int[][] stage1 = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,}, 
@@ -29,40 +31,21 @@ int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 
-int[][] stagecopy = {
+int[][] stage2 = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
-    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 0, 6, 5, 0, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 0, 7, 8, 0, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,}, 
-    {1, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1,}, 
-    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1,}, 
+    {1, 0, 6, 0, 1, 0, 2, 0, 0, 1, 0, 5, 0, 1,}, 
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1,}, 
+    {1, 0, 7, 0, 1, 1, 1, 1, 1, 1, 0, 8, 0, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 
 /*
 int[][] stage = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 5, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};*/
-
-/*
-int[][] stage = {
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-  {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};
-int[][] stagecopy = {
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
   {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
@@ -70,22 +53,19 @@ int[][] stagecopy = {
 */
 
 public void setup() {
+ if (stage == null && stagecopy == null){
+    stage=copyOverStage(stage1);
+    stagecopy=copyOverStage(stage1);
+  } 
   //imgEnd = loadImage("You Win.png");
-  gameWon = false;
   size(stage[0].length*50, stage.length*50);
+  gameWon = false;
   pac = new MrPacman();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
   placeBlocksTiles();
   ghosts = new ArrayList<Ghost>();
-  Ghost reddy= new Reddy();
-  Ghost blue = new BlueG();
-  Ghost orange = new OrangeCream();
-  Ghost pink = new Pinky();
-  ghosts.add(reddy);
-  ghosts.add(blue);
-  ghosts.add(orange);
-  ghosts.add(pink);
+  placeGhosts();
 }  
 
 //looks through the arraylist and if there is a corresponding number, adds to another arraylist of those objects
@@ -104,6 +84,16 @@ public void placeBlocksTiles() {
   }
 }
 
+public void placeGhosts(){
+  Ghost reddy= new Reddy();
+  Ghost blue = new BlueG();
+  Ghost orange = new OrangeCream();
+  Ghost pink = new Pinky();
+  ghosts.add(reddy);
+  ghosts.add(blue);
+  ghosts.add(orange);
+  ghosts.add(pink);  
+}
 
 public void draw() {
   background(0); 
@@ -310,8 +300,26 @@ public void keyPressed() {
       pac.setNextDirection('l');
     }
   }
+  
+  //CHEAT MODE
+  if (key=='z'){
+    for (Ghost g : ghosts){
+      g.setScared(true); 
+    }
+  }
+  if (key=='2'){
+    stage = copyOverStage(stage2);
+    stagecopy = copyOverStage(stage2);
+  }
 }
 
-
-
+public int[][] copyOverStage(int[][] orig){
+  int[][] newCopy = new int[orig.length][orig[0].length];
+  for (int c= 0; c<orig.length;c++){
+    for (int r=0; r<orig[0].length;r++){
+      newCopy[c][r]=orig[c][r];
+    }
+  }
+  return newCopy;
+}
 
