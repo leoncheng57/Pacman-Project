@@ -7,6 +7,8 @@ ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
 boolean gameWon;
+boolean gameLost;
+int[][] originalStage;
 //PImage wonImage;
 
 /*
@@ -22,6 +24,8 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+*/
+/*
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
@@ -35,10 +39,24 @@ int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 */
+/*
 int[][] stage = {
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
   {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
+*/
+int[][] stage = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 6, 1, 5, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 7, 1, 8, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1,}, 
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1,}, 
+    {1, 9, 0, 0, 0, 2, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 /**
   * 0 = tile
@@ -49,8 +67,10 @@ int[][] stage = {
   **/
 
 public void setup() {
+  copyOriginalStage();
   //wonImage = loadImage("You Win.png");
   gameWon = false;
+  gameLost = false;
   size(stage[0].length*50, stage.length*50);
   //initializing stuff
   pac = new MrPacman();
@@ -68,14 +88,22 @@ public void setup() {
   ghosts.add(pink);
 }  
 
+public void copyOriginalStage(){
+  originalStage = new int[stage.length][stage[0].length];
+  for (int c= 0; c<stage.length;c++){
+    for (int r=0; r<stage[0].length;r++){
+      originalStage[c][r] = stage[c][r]; 
+    }
+  }
+}
+
 public void placeBlocks() {
-  int[][] blocksGrid = stage;
-  //Note: blocksGrid is a column-major array?
-  for (int c= 0; c<blocksGrid.length;c++){
-    for (int r=0; r<blocksGrid[0].length;r++){
-      if (blocksGrid[c][r]==1)
+  //Note: stage is a column-major array?
+  for (int c= 0; c<stage.length;c++){
+    for (int r=0; r<stage[0].length;r++){
+      if (stage[c][r]==1)
         blocks.add(new Block(r,c));   
-      else if (blocksGrid[c][r]==9)
+      else if (stage[c][r]==9)
         tiles.add(new Tile(r,c,true));      
       else
         tiles.add(new Tile(r,c,false));  
@@ -232,26 +260,32 @@ public boolean hasWon(){
 }
 
 public void endGame(){
-  if (hasWon()){
-    //noLoop();
+  if (hasWon() || gameLost){
+    noLoop();
     background(0);
     textAlign(CENTER);
     textSize(60);
-    text("You Win!", width/2, height/2);
+    if (hasWon()) {
+      text("You Win!", width/2, height/2);
+      gameWon = true;
+    }
+    if (gameLost) {
+      text("You Lost! :(", width/2, height/2);
+    }
     textSize(30);
     text("Click to play again!", width/2, height/2+30); 
-    //blocks = null;
-    //ghosts = null;
-    //tiles = null;
-    //score = 0;
-    //pac = null;
-    gameWon = true;
+    stage=originalStage;
+    blocks = null;
+    ghosts = null;
+    tiles = null;
+    score = 0;
+    pac = null;
   }
 }
 
-//not working right, things do not totally reset, powerups do not return, ghosts do not reset, pacman does not reset
+//not working right, things do not totally reset, powerups do not return, ghosts do not reset, pacman does not reset, something wrong with text placement, weird glitches sometimes
 public void mouseClicked(){
-  if (gameWon){
+  if (gameWon || gameLost){
     setup(); 
     loop();
   } 
@@ -272,17 +306,25 @@ public void keyPressed() {
   }
 }
 
+//ERROR: not working perfectly, do ghosts disappear?
 public void encounter(){
   for (Ghost g : ghosts){
     if (g.getX()==pac.getX() && g.getY()==pac.getY()){
       if (g.isScared()){
+        //ghosts.remove(g);
+        g.restartAtOriginal();
+        score += 50;
         println("Kill the ghost");
       }    
       else{
+        score -= 100;
         println("Kill pacman"); 
+        pac.loseLife();
+        if (pac.getLives()<=0){
+          gameLost = true; 
+        }
       }
     }
   }  
 }
-
 

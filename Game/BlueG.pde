@@ -10,7 +10,7 @@ public class BlueG extends Ghost{
     }
     size = 25;
     col = #92FAF9;
-    speed = 5;  
+    speed = 5; //ERROR: movement seems to break when speed number is changed. Why? Is the number 5 used somewhere in the code?  
     scared=false;
     setDirection('l');
     setID(6);

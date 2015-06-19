@@ -25,7 +25,7 @@ public class Tile extends Node {
   public void eatPower() {
     points=false;
     power=false;
-    score+=10;
+    score+=20;
     for (Ghost g : ghosts){
       g.setScared(true);
     }
@@ -33,7 +33,7 @@ public class Tile extends Node {
 
   public void eatPoints() {
     points=false;
-    score++;
+    score+=10;
   }
 
   public void drawMe() {

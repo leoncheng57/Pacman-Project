@@ -2,9 +2,11 @@ public class Ghost extends Organism {
 
   boolean scared;
   color oldColor;
-  private int[][] stageCopy;
+  //private int[][] stageCopy;
   int timebefore;
-  int scaredDuration = 2000;
+  int scaredDuration;
+  float originalX;
+  float originalY;
 
   public Ghost() {     
     for (int c= 0; c<stage.length; c++) {
@@ -12,6 +14,8 @@ public class Ghost extends Organism {
         if (stage[c][r]==5) {
           xCor=r*50+Node.size/2; 
           yCor=c*50+Node.size/2;
+          originalX = xCor;
+          originalY = yCor;
         }
       }
     }
@@ -21,6 +25,12 @@ public class Ghost extends Organism {
     scared=false;
     setDirection('l');
     timebefore=0;
+    scaredDuration = 2000;
+  }
+
+  public void restartAtOriginal() {
+    xCor = originalX;
+    yCor = originalY;
   }
 
   public void randomDirection() {
