@@ -1,4 +1,4 @@
-//not used, experimental 
+//not used anymore, experimental 
 public class Maze {
 
   private Frontier f;

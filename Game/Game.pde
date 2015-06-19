@@ -1,8 +1,3 @@
-/**
- * Use SCRAP PAPER, scribble it out on PAPER first before typing in code
- * Browse Commits: https://github.com/leoncheng57/Pacman-Project/commits/master/Pacman
-**/
-
 import java.util.*;
 import java.io.*;
 
@@ -12,7 +7,8 @@ ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
 boolean gameWon;
-//PImage wonImage;
+//PImage imgEnd;
+
 /**
   * 0 = tile
   * 1 = block
@@ -20,22 +16,6 @@ boolean gameWon;
   * 5/6/7/8 = ghosts
   * 9 = powerup
   **/
-/*
-int[][] stage = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 5, 1, 1,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};*/
-
-
-
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
@@ -61,6 +41,20 @@ int[][] stagecopy = {
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+
+/*
+int[][] stage = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 5, 1, 1,}, 
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};*/
 
 /*
 int[][] stage = {
@@ -76,10 +70,9 @@ int[][] stagecopy = {
 */
 
 public void setup() {
-  //wonImage = loadImage("You Win.png");
+  //imgEnd = loadImage("You Win.png");
   gameWon = false;
   size(stage[0].length*50, stage.length*50);
-  //initializing stuff
   pac = new MrPacman();
   blocks = new ArrayList<Block>();
   tiles = new ArrayList<Tile>();
@@ -94,6 +87,7 @@ public void setup() {
   ghosts.add(orange);
   ghosts.add(pink);
 }  
+
 //looks through the arraylist and if there is a corresponding number, adds to another arraylist of those objects
 public void placeBlocksTiles() {
   int[][] blocksGrid = stage;
@@ -131,11 +125,10 @@ public void draw() {
       move(g);
       updateGhost(g);
     }
+    g.killPac();
     if (g.isScared()){
       g.badtimes(); 
     }  
-    else
-      g.killPac();
   }
   
     
@@ -219,7 +212,6 @@ public void earnPoints(){
   } 
 }
 
-
 public void updatePac() {
   if (pac.getX()%50==25 && pac.getY()%50==25) {
     for (int c= 0; c<stage.length; c++) {
@@ -268,7 +260,7 @@ public boolean hasWon(){
 
 public void endGame(){
   if (hasWon()){
-    //noLoop();
+    noLoop();
     background(0);
     textAlign(CENTER);
     textSize(60);
@@ -279,7 +271,8 @@ public void endGame(){
     gameWon = true;
   }
   if (!pac.isAlive()){
-     background(0);
+    noLoop();
+    background(0);
     textAlign(CENTER);
     textSize(60);
     text("You Lost!", width/2, height/2);

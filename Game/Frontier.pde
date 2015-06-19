@@ -1,5 +1,4 @@
-//not used, experimental 
-import java.util.*;
+//not used anymore, experimental 
 public class Frontier {
   public LinkedList<Node> l = new LinkedList<Node>();
   public void add(Node n) {

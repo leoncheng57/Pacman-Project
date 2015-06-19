@@ -38,8 +38,8 @@ public class Ghost extends Organism {
     else if (num == 2) setNextDirection('l');
     else if (num == 3) setNextDirection('r');
   }  
-  
- //actions that happen to ghost when Pacman gets a powerup.
+
+  //actions that happen to ghost when Pacman gets a powerup.
   public void badtimes() {
     if (timebefore==0) {
       timebefore=millis();
@@ -48,13 +48,12 @@ public class Ghost extends Organism {
       this.setEdible(true);
     }
     if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25 && this.isEdible()) {
-      println("im here");
+      println("im eaten");
       this.setAlive(false);
       this.setReady(false);
       score+=50;
       this.setEdible(false);
       return;
-      //println(this.isAlive());
     }
 
     //println(millis()-timebefore);
@@ -69,7 +68,6 @@ public class Ghost extends Organism {
     scared=e;
   }
 
-
   public boolean isScared() {
     return scared;
   }
@@ -78,32 +76,30 @@ public class Ghost extends Organism {
     this.setColor(oldColor);
     this.setX(spawnPointX);
     this.setY(spawnPointY);
-
     if (spawnTime==0) {
       spawnTime=millis(); //WHat is spawntiem? to keep them in the base for like 5 secs before they go back out and start moving.  bascially ready variable allows themt o move alive is for drawing  ill brb
       this.setColor(oldColor);
       this.setAlive(true);
     }
-
-    println(millis()-spawnTime);
+    //println(millis()-spawnTime);
     if (millis()-spawnTime > 4000) {
-      println("this happens");
+      //println("this happens");
       this.setReady(true); 
       spawnTime=0;
     }
   }
 
-  public void killPac(){
-    if (abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25){
+  public void killPac() {
+    if (!this.isEdible() && abs(this.getX()-pac.getX())<25 && abs(this.getY()-pac.getY())<25) {
       pac.setAlive(false);
     }
   }
-  
-  public void setEdible(boolean e){
-   edible=e; 
+
+  public void setEdible(boolean e) {
+    edible=e;
   }
-  
-  public boolean isEdible(){
+
+  public boolean isEdible() {
     return edible;
   }
 }
