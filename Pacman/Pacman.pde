@@ -11,7 +11,9 @@ ArrayList<Ghost> ghosts;
 ArrayList<Block> blocks;
 ArrayList<Tile> tiles;
 int score;
-int timebefore=0;
+boolean gameWon;
+//PImage wonImage;
+
 /*
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
@@ -25,7 +27,6 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
-*/
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
@@ -38,7 +39,14 @@ int[][] stage = {
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
+*/
+int[][] stage = {
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+  {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
 /**
+  * 0 = tile
   * 1 = block
   * 2 = pacman
   * 5/6/7/8 = ghosts
@@ -46,10 +54,14 @@ int[][] stage = {
   **/
 
 public void setup() {
-  background(0);
+  //wonImage = loadImage("You Win.png");
+  gameWon = false;
   size(stage[0].length*50, stage.length*50);
   //initializing stuff
   pac = new MrPacman();
+  blocks = new ArrayList<Block>();
+  tiles = new ArrayList<Tile>();
+  placeBlocks();
   ghosts = new ArrayList<Ghost>();
   Ghost reddy= new Reddy();
   Ghost blue = new BlueG();
@@ -59,9 +71,6 @@ public void setup() {
   ghosts.add(blue);
   ghosts.add(orange);
   ghosts.add(pink);
-  blocks = new ArrayList<Block>();
-  tiles = new ArrayList<Tile>();
-  placeBlocks();
 }  
 
 public void placeBlocks() {
@@ -109,6 +118,7 @@ public void draw() {
   fill(#FCFC30);
   text("Score:"+score,25,480);
   
+  endGame();
 }
 
 public void normalAction(Ghost g){
@@ -212,6 +222,40 @@ public void updateGhost(Ghost g) {
       }
     }
   }
+}
+
+public boolean hasWon(){
+  for (Tile t : tiles){
+    if (t.hasPower() || t.hasPoints()){
+      return false; 
+    }
+  } 
+  return true;
+}
+
+public void endGame(){
+  if (hasWon()){
+    //noLoop();
+    background(0);
+    textAlign(CENTER);
+    textSize(60);
+    text("You Win!", width/2, height/2);
+    textSize(30);
+    text("Click to play again!", width/2, height/2+30); 
+    //blocks = null;
+    //ghosts = null;
+    //tiles = null;
+    //score = 0;
+    //pac = null;
+    gameWon = true;
+  }
+}
+
+public void mouseClicked(){
+  if (gameWon){
+    setup(); 
+    loop();
+  } 
 }
 
 //stores direction in the var nextDirection b/c Pacman may have to wait until it is able to change direction
