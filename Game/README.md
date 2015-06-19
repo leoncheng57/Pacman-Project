@@ -1,5 +1,13 @@
-**PACMAN***
-By Javis Wu and Leon Cheng
+**PACMAN**
+<br>*By Javis Wu and Leon Cheng*
+
+Instructions
+------------
+Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food without getting killed by ghosts. But if you eat a powerup, you can kill the scared ghosts for more points!. Have fun!
+* move with arrow keys
+* win by eating all food
+* lose lives if killed by ghost
+* eat scared ghosts when you have powerup
 
 NOTES
 =====
@@ -16,6 +24,7 @@ TODO
 * a way to win
 * multiple levels? increasing difficulty?
 * deal with comments inside code
+* Make sure to contact Z when we're finished and thank him for the extension 
 
 Questions
 ---------
