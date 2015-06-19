@@ -4,14 +4,16 @@
 Instructions
 ------------
 Regular Instructions:
-<br>
-Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food without getting killed by ghosts. But if you eat a powerup, you can kill the scared ghosts for more points!. Have fun!
-<br>Simple Instructions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food without getting killed by ghosts. But if you eat a powerup, you can kill the scared ghosts for more points!. Have fun!
+
+<p>Simple Instructions:
 * move with arrow keys
 * win by eating all food
 * lose lives if killed by ghost
 * eat scared ghosts when you have powerup
-<br>Cheat:
+
+<p> Cheat:
 * press z to start force ghosts into scared mode
 
 NOTES FOR Z
