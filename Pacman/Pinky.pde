@@ -15,5 +15,8 @@ public class Pinky extends Ghost{
     setDirection('l');
     setID(8);
     setAlive(true);
+    setReady(true);
+    spawnPointX=xCor;
+    spawnPointY=yCor;
   }
 }

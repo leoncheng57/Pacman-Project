@@ -26,7 +26,7 @@ int[][] stage = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};
+};*/
 int[][] stage = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
@@ -39,12 +39,12 @@ int[][] stage = {
     {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
-*/
+/*
 int[][] stage = {
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
   {1, 7, 0, 0, 0, 0, 9, 0, 2, 1, 1, 1, 1, 1,}, 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
-};
+};*/
 /**
   * 0 = tile
   * 1 = block
@@ -100,11 +100,17 @@ public void draw() {
   updatePac();
   
   for (Ghost g : ghosts){
+    if (g.isAlive()){
     g.drawMe();
+    }
+    else
+      g.respawn();
+    if (g.isReady()){
     g.randomDirection();
     changeDirection(g);
     move(g);
     updateGhost(g);
+    }
     if (g.isScared()){
       g.badtimes(); 
     }  
@@ -112,7 +118,7 @@ public void draw() {
   
     
   earnPoints();
-  println("score: "+score);
+  //println("score: "+score);
   //printStage();
   textSize(32);
   fill(#FCFC30);

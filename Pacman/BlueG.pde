@@ -15,5 +15,8 @@ public class BlueG extends Ghost{
     setDirection('l');
     setID(6);
     setAlive(true);
+    setReady(true);
+    spawnPointX=xCor;
+    spawnPointY=yCor;
   }
 }

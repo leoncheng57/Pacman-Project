@@ -9,7 +9,7 @@ public class Organism {
   float size;
   int ID;
   boolean alive;
-
+  boolean ready;
   private Organism() {
   }  //should this be private or public?
 
@@ -50,6 +50,12 @@ public class Organism {
   public float getY() {
     return yCor;
   }
+  public void setX(float e){
+    xCor=e;
+  }
+  public void setY(float e){
+    yCor=e;
+  }
   public int getID(){
     return ID;
   }
@@ -61,6 +67,12 @@ public class Organism {
   }
   public void setAlive(boolean e){
     alive=e;
+  }
+  public boolean isReady(){
+    return ready;
+  }
+  public void setReady(boolean e){
+    ready=e;
   }
 
   public void move() {

@@ -15,5 +15,8 @@ public class OrangeCream extends Ghost{
     setDirection('l');
     setID(7);
     setAlive(true);
+    setReady(true);
+    spawnPointX=xCor;
+    spawnPointY=yCor;
    }
 }

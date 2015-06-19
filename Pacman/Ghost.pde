@@ -4,8 +4,10 @@ public class Ghost extends Organism {
   color oldColor;
   private int[][] stageCopy;
   int timebefore;
-  int scaredDuration = 2000;
-
+  int spawnTime;
+  int scaredDuration = 20000;
+  float spawnPointX;
+  float spawnPointY;
   public Ghost() {     
     for (int c= 0; c<stage.length; c++) {
       for (int r=0; r<stage[0].length; r++) {
@@ -21,6 +23,7 @@ public class Ghost extends Organism {
     scared=false;
     setDirection('l');
     timebefore=0;
+    spawnTime=0;
   }
 
   public void randomDirection() {
@@ -38,6 +41,14 @@ public class Ghost extends Organism {
       oldColor = col;
     }
     this.setColor(#1C5CFA); //blue, color of scared ghosts
+    if (abs(this.getX()-pac.getX())==0 && abs(this.getY()-pac.getY())==0){
+      println("im here");
+      this.setAlive(false);
+      this.setReady(false);
+      
+      //println(this.isAlive());
+    }
+    
     //println(millis()-timebefore);
     if (millis()-timebefore > scaredDuration) {
       this.setColor(oldColor);
@@ -52,6 +63,23 @@ public class Ghost extends Organism {
 
   public boolean isScared() {
     return scared;
+  }
+  public void respawn(){
+    this.setX(spawnPointX);
+    this.setY(spawnPointY);
+    this.setColor(oldColor);
+    this.drawMe();
+    if (spawnTime==0){
+      spawnTime=millis();
+    }
+    this.setColor(oldColor);
+    this.setAlive(true);
+    if (millis()-spawnTime > 2000){
+     println("this happens");
+     this.setReady(true); 
+    }
+      
+    
   }
 }
 

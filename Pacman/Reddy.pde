@@ -15,5 +15,8 @@ public class Reddy extends Ghost{
     setDirection('l');
     setID(5);
     setAlive(true);
+    setReady(true);
+    spawnPointX=xCor;
+    spawnPointY=yCor;
   } 
 }
