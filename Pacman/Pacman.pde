@@ -251,6 +251,7 @@ public void endGame(){
   }
 }
 
+//not working right, things do not totally reset, powerups do not return, ghosts do not reset
 public void mouseClicked(){
   if (gameWon){
     setup(); 
