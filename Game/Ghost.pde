@@ -62,6 +62,8 @@ public class Ghost extends Organism {
     if (millis()-timebefore > scaredDuration) {
       this.setColor(oldColor);
       this.setScared(false);
+      this.setReady(true);
+      this.setEdible(false);
       timebefore=0;
     }
   }

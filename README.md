@@ -5,13 +5,15 @@ Instructions
 ------------
 <h6>Regular Instructions</h6>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food without getting killed by ghosts. But if you eat a powerup, you can kill the scared ghosts for more points!. Have fun!
+&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Pacman! Use the arrow keys to control MrPacman. Try to eat all of the food to win! If you eat a powerup, you can kill the scared ghosts for more points!. Play with different stages! Have fun!
 
 <h6>Simple Instructions</h6>
 * move with arrow keys
+* gain points by eating food
 * win by eating all food
-* lose lives if killed by ghost
+* lose if killed by ghost
 * eat scared ghosts when you have powerup
+* use number keys (1,2,3,4,5) to change the stage after you die/win
 
 <h6>Cheat</h6>
 * press z to start force ghosts into scared mode
@@ -19,10 +21,6 @@ Instructions
 NOTES FOR Z
 =====
 We had trouble with trying to use a recursive solve for the ghost ai movement. Did not work out in the end and took up a lot of time. Then we tried BFS but that also had errors. We left the code in if you want to take a look at it. In the end, we resorted to random movement.
-
-TODO
-----
-* Make sure to contact Z when we're finished and thank him for the extension 
 
 DEVLOG
 ------
@@ -49,4 +47,4 @@ DEVLOG
 * 6/16 - gave up on solve and bfs, couldn't get, now using random movement
 * 6/17 - added 4 ghosts, worked on superpower, scared, and ghost dying
 * 6/18 - added endGame and mouseclicked
-* 6/19 - got ghosts to kill pac, got pac to kill ghosts, ghosts able to respawn, able to restart game, game endscreen made, used multiple stages
+* 6/19 - got ghosts to kill pac, got pac to kill ghosts, ghosts able to respawn, able to restart game, game endscreen made, added multiple stages
