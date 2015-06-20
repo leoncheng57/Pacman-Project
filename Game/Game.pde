@@ -37,10 +37,23 @@ int[][] stage2 = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
     {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1,}, 
     {1, 0, 6, 0, 1, 0, 2, 0, 0, 1, 0, 5, 0, 1,}, 
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1,}, 
+    {1, 0, 0, 0, 1, 9, 0, 0, 9, 1, 0, 0, 0, 1,}, 
     {1, 0, 7, 0, 1, 1, 1, 1, 1, 1, 0, 8, 0, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+};
+
+int[][] stage3 = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
+    {1, 9, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 9, 1,}, 
+    {1, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 1,}, 
+    {1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1,}, 
+    {1, 0, 1, 1, 0, 1, 5, 6, 1, 0, 1, 1, 0, 1,}, 
+    {1, 0, 1, 1, 0, 1, 7, 8, 1, 0, 1, 1, 0, 1,}, 
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,}, 
+    {1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1,}, 
+    {1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1,}, 
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}, 
 };
 
@@ -53,7 +66,7 @@ int[][] stage = {
 */
 
 public void setup() {
- if (stage == null && stagecopy == null){
+  if (stage == null && stagecopy == null){
     stage=copyOverStage(stage1);
     stagecopy=copyOverStage(stage1);
   } 
@@ -257,7 +270,8 @@ public void endGame(){
     text("You Win!", width/2, height/2);
     textSize(30);
     text("Final Score: "+score,width/2,height/2+39);
-    text("Click to play again!", width/2, height/2+60); 
+    text("Press 1, 2, or 3 to change the stage", width/2, height/2+70); 
+    text("Click to play again!", width/2, height/2+110); 
     gameWon = true;
   }
   if (!pac.isAlive()){
@@ -268,7 +282,8 @@ public void endGame(){
     text("You Lost!", width/2, height/2);
     textSize(30);
     text("Final Score: "+score,width/2,height/2+39);
-    text("Click to play again!", width/2, height/2+60); 
+    text("Press 1, 2, or 3 to change the stage", width/2, height/2+70); 
+    text("Click to play again!", width/2, height/2+110); 
   }
 }
 
@@ -308,9 +323,17 @@ public void keyPressed() {
   }
   
   //stages
+  if (key=='1'){
+    stage = copyOverStage(stage1);
+    stagecopy = copyOverStage(stage1);
+  }
   if (key=='2'){
     stage = copyOverStage(stage2);
     stagecopy = copyOverStage(stage2);
+  }
+  if (key=='3'){
+    stage = copyOverStage(stage3);
+    stagecopy = copyOverStage(stage3);
   }
 }
 
